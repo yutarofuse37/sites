@@ -4,24 +4,27 @@
 
 **公開URL:** https://yutarofuse37.github.io/sites/
 
-**編集画面（ノーコード）:** https://yutarofuse37.github.io/sites/admin/
+**編集画面:** https://yutarofuse37.github.io/sites/admin/
 
-`main` への push / 編集画面からの保存で GitHub Actions が動き、GitHub Pages に反映されます。
+## 編集のしかた（トークンログイン）
 
-## 編集のしかた
+GitHub の「Sign in with GitHub」は使わず、Personal Access Token で編集します。
 
 1. https://yutarofuse37.github.io/sites/admin/ を開く
-2. GitHub アカウントでログインする（必要なら Personal Access Token）
-3. 「サイト内容」からプロフィール・学歴・経歴・業績・スライドを編集して保存
+2. [Fine-grained token 作成](https://github.com/settings/personal-access-tokens/new)
+3. Repository access で `yutarofuse37/sites` を選択
+4. Permissions → **Contents: Read and write**
+5. 発行したトークンを編集画面に貼ってログイン
+6. プロフィール / 学歴 / 経歴 / 論文 / スライドを編集して「GitHub に保存」
 
-内容は `data/site.json` に保存されます。HTML を直接書き換える必要はありません。
+保存すると `data/site.json` が更新され、Actions 経由でサイトに反映されます。
 
 ## ページ
 
 - `index.html` — Home
 - `papers.html` — Papers/Talks
 - `slides.html` — Slides
-- `admin/` — 編集用 UI（Sveltia CMS）
+- `admin/` — 編集画面
 
 ## ローカルで確認
 
