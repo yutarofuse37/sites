@@ -19,13 +19,14 @@ Papers/Talks は `data/papers.json` にまとめて登録します（1回の編�
 各業績に英語欄・日本語欄を持てます。会場・会議 HP の URL、スライド URL、DOI などの追加リンク（`表示名|URL`）もここで設定できます。
 所属の研究室名は `lab_name` / `lab_url` で自己紹介文中をリンク化します。
 指導教員は各学歴エントリの `advisors` に登録し、清水先生のページと同様に「指導教員: 氏名」と表示します。
+リンクマップ（researchmap / Google Scholar / ORCID など）は `links` に `表示名|URL` で登録します。
 
 ## ページ
 
-- `index.html` / `en/index.html` — Home（研究室リンク・学歴下の指導教員）
+- `index.html` / `en/index.html` — Home（研究室リンク・リンクマップ・学歴下の指導教員）
 - `papers.html` / `en/papers.html` — Papers/Talks（スライドリンク付き）
 - `admin/` — 編集画面
-- `data/site.json` / `data/site.en.json` — プロフィール・学歴（指導教員含む）・経歴
+- `data/site.json` / `data/site.en.json` — プロフィール・リンクマップ・学歴（指導教員含む）・経歴
 - `data/papers.json` — Papers/Talks（日英共通・スライド含む）
 
 ## ローカルで確認

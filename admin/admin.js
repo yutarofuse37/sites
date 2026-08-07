@@ -142,6 +142,9 @@
     const introText = (p.intro || [])
       .map((item) => (typeof item === "string" ? item : item.paragraph || ""))
       .join("\n\n");
+    const linksText = (data.links || [])
+      .map((link) => `${link.label || ""}|${link.url || ""}`)
+      .join("\n");
     requirePanel("profile").innerHTML = `
       <h2>プロフィール</h2>
       ${field("氏名（日本語）", "name_ja", p.name_ja || "")}
@@ -152,6 +155,12 @@
       ${field("メール（表示用・リンクなし）", "email", p.email || "")}
       ${field("サイト説明（SEO）", "description", p.description || "", true)}
       ${field("自己紹介（段落は空行で区切る）", "intro", introText, true)}
+      ${field(
+        "リンクマップ（表示名|URL を1行ずつ。researchmap / Google Scholar / ORCID など）",
+        "links",
+        linksText,
+        true
+      )}
     `;
   };
 
@@ -334,6 +343,19 @@
         experience.push({ title, items });
       });
 
+    const links = String(profileFields.links || "")
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((line) => {
+        const [label, ...rest] = line.split("|");
+        return {
+          label: (label || "").trim(),
+          url: rest.join("|").trim(),
+        };
+      })
+      .filter((link) => link.label);
+
     return {
       profile: {
         name_ja: profileFields.name_ja || "",
@@ -345,6 +367,7 @@
         description: profileFields.description || "",
         intro,
       },
+      links,
       education,
       experience,
     };
@@ -413,6 +436,7 @@
     data = JSON.parse(decodeGithubFile(siteFile));
     papersData = JSON.parse(decodeGithubFile(papersFile));
     if (!papersData.paper_sections) papersData.paper_sections = [];
+    if (!data.links) data.links = [];
     renderAll();
     setStatus(
       activeTab === "papers"
@@ -638,6 +662,7 @@
       );
       siteSha = siteFile.sha;
       data = JSON.parse(decodeGithubFile(siteFile));
+      if (!data.links) data.links = [];
       renderProfile();
       renderEducation();
       renderExperience();
