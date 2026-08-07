@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body data-page="slides">
     <header class="site-header">
       <div class="site-header__inner">
         <a class="logo" href="./index.html">Yutaro Fuse</a>
@@ -26,66 +26,12 @@
       </div>
     </header>
 
-    <main class="page">
-      <h1>Slides</h1>
-
-      <ul class="slides">
-        <li>
-          <a
-            href="https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Multiplicative Weights Update for Absolute Algebraic Connectivity
-          </a>
-          <span class="slides__meta"
-            >夏のLAシンポジウム2026 / 布施 祐大郎，清水 伸高</span
-          >
-        </li>
-        <li>
-          <a
-            href="https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Average Network Flow 最大化問題に対する近似解法
-          </a>
-          <span class="slides__meta"
-            >冬のLAシンポジウム2025 / 布施 祐大郎，清水 伸高，塩浦 昭義</span
-          >
-        </li>
-        <li>
-          <a
-            href="https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            An Efficient Algorithm for Computing Average Network Flow
-          </a>
-          <span class="slides__meta"
-            >WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, Akiyoshi
-            Shioura</span
-          >
-        </li>
-        <li>
-          <a
-            href="https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            輪講資料
-          </a>
-          <span class="slides__meta"
-            >経営工学・経済学輪講（最小カット / 辺連結度増加など）</span
-          >
-        </li>
-      </ul>
-    </main>
+    <main class="page" id="content"></main>
 
     <footer class="site-footer">
       <p>© <span id="year"></span> Yutaro Fuse</p>
     </footer>
 
-    <script src="./main.js"></script>
+    <script src="./site.js"></script>
   </body>
 </html>

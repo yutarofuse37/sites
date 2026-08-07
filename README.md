@@ -4,26 +4,24 @@
 
 **公開URL:** https://yutarofuse37.github.io/sites/
 
-`main` への push で GitHub Actions から GitHub Pages にデプロイされます。
+**編集画面（ノーコード）:** https://yutarofuse37.github.io/sites/admin/
+
+`main` への push / 編集画面からの保存で GitHub Actions が動き、GitHub Pages に反映されます。
+
+## 編集のしかた
+
+1. https://yutarofuse37.github.io/sites/admin/ を開く
+2. GitHub アカウントでログインする（必要なら Personal Access Token）
+3. 「サイト内容」からプロフィール・学歴・経歴・業績・スライドを編集して保存
+
+内容は `data/site.json` に保存されます。HTML を直接書き換える必要はありません。
 
 ## ページ
 
-- `index.html` — Home（自己紹介・学歴・経歴）
+- `index.html` — Home
 - `papers.html` — Papers/Talks
 - `slides.html` — Slides
-
-## researchmap 連携
-
-`config.js` の `researchmapPermalink` に researchmap の ID を入れると、
-Papers/Talks を API から自動取得します。
-
-```js
-window.SITE_CONFIG = {
-  researchmapPermalink: "your-id", // https://researchmap.jp/your-id
-};
-```
-
-未設定時は `papers.html` の手書き一覧を表示します。
+- `admin/` — 編集用 UI（Sveltia CMS）
 
 ## ローカルで確認
 
@@ -31,4 +29,5 @@ window.SITE_CONFIG = {
 python3 -m http.server 8080
 ```
 
-http://localhost:8080 を開いてください。
+- サイト: http://localhost:8080
+- 編集画面: http://localhost:8080/admin/
