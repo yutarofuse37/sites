@@ -191,7 +191,12 @@
     if (!value) return "";
     if (/^https?:\/\//i.test(value)) return safeUrl(value);
     // Site-root relative path (e.g. assets/uploads/photo.jpg)
-    return `${base}${value.replace(/^\.?\//, "")}`;
+    const relative = value.replace(/^\.?\//, "");
+    const encoded = relative
+      .split("/")
+      .map((part) => encodeURIComponent(part))
+      .join("/");
+    return `${base}${encoded}`;
   };
 
   const renderPhoto = (profile) => {
