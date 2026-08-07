@@ -5,14 +5,28 @@
     "affiliation": "東京科学大学 工学院 経営工学系 修士課程",
     "lab_name": "塩浦研究室",
     "lab_url": "http://www.shioura-lab.iee.e.titech.ac.jp/",
+    "photo": "",
     "email": "fuse.y.6680 [at] m.isct.ac.jp",
     "description": "東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎。離散最適化・オペレーションズ・リサーチ・ネットワークフローを研究しています。",
     "intro": [
       "東京科学大学 工学院 経営工学系塩浦研究室の修士課程の学生です。離散最適化，オペレーションズ・リサーチ，特にネットワークフローに関連するものを研究しています。"
     ],
-    "photo": "",
     "url_note": "サイトURLの「37」は、同姓同名の研究者と区別するために付けています。"
   },
+  "links": [
+    {
+      "label": "researchmap",
+      "url": "https://researchmap.jp/yutaro_fuse"
+    },
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.co.jp/citations?hl=ja&user=CvAv3roAAAAJ"
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0009-0006-3757-3541"
+    }
+  ],
   "education": [
     {
       "period": "2025年4月 — 現在",
@@ -77,20 +91,6 @@
           "detail": "R7年度 経営・経済数学（東京科学大学 工学院 経営工学系），担当教員：塩浦 昭義 教授"
         }
       ]
-    }
-  ],
-  "links": [
-    {
-      "label": "researchmap",
-      "url": "https://researchmap.jp/yutaro_fuse"
-    },
-    {
-      "label": "Google Scholar",
-      "url": "https://scholar.google.co.jp/citations?hl=ja&user=CvAv3roAAAAJ"
-    },
-    {
-      "label": "ORCID",
-      "url": "https://orcid.org/0009-0006-3757-3541"
     }
   ]
 }
