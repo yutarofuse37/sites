@@ -205,8 +205,8 @@
   const renderPapers = () => {
     const sections = papersData.paper_sections || [];
     panels.papers.innerHTML = `
-      <h2>Papers / Talks（日英共通）</h2>
-      <p class="status">ここは日本語・英語で同じ内容を使います。1回保存すれば両方の Papers/Talks に反映されます。会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
+      <h2>Papers / Talks（日英まとめて登録）</h2>
+      <p class="status">1回の登録で日本語・英語の両方に反映されます。英語欄が空なら日本語欄を表示します。会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
       <div id="papers-list"></div>
       <button type="button" class="btn btn--small" data-add="paper-section">＋ セクション追加</button>
     `;
@@ -220,12 +220,16 @@
               .join("\n");
             return `
           <div class="item-card" data-s="${si}" data-i="${ii}">
-            ${field("著者", "authors", item.authors || "")}
-            ${field("タイトル", "title", item.title || "")}
-            ${field("掲載先・会議名など", "venue", item.venue || "", true)}
+            ${field("著者（英語）", "authors", item.authors || "")}
+            ${field("著者（日本語）", "authors_ja", item.authors_ja || "")}
+            ${field("タイトル（英語）", "title", item.title || "")}
+            ${field("タイトル（日本語）", "title_ja", item.title_ja || "")}
+            ${field("掲載先・会議名（英語）", "venue", item.venue || "", true)}
+            ${field("掲載先・会議名（日本語）", "venue_ja", item.venue_ja || "", true)}
             ${field("会場 / 会議 HP URL", "venue_url", item.venue_url || "")}
             ${field("追加リンク（表示名|URL）", "links", linksText, true)}
-            ${field("補足", "note", item.note || "", true)}
+            ${field("補足（英語）", "note", item.note || "", true)}
+            ${field("補足（日本語）", "note_ja", item.note_ja || "", true)}
             <div class="row-actions">
               <button type="button" class="btn btn--small btn--danger" data-remove="paper-item" data-s="${si}" data-i="${ii}">削除</button>
             </div>
@@ -364,11 +368,15 @@
               .filter((link) => link.label && link.url);
             return {
               authors: f.authors || "",
+              authors_ja: f.authors_ja || "",
               title: f.title || "",
+              title_ja: f.title_ja || "",
               venue: f.venue || "",
+              venue_ja: f.venue_ja || "",
               venue_url: f.venue_url || "",
               links,
               note: f.note || "",
+              note_ja: f.note_ja || "",
             };
           }
         );
@@ -538,11 +546,15 @@
         items: [
           {
             authors: "",
+            authors_ja: "",
             title: "",
+            title_ja: "",
             venue: "",
+            venue_ja: "",
             venue_url: "",
             links: [],
             note: "",
+            note_ja: "",
           },
         ],
       });
@@ -557,11 +569,15 @@
       papersData = collectPapersData();
       papersData.paper_sections[Number(btn.dataset.s)].items.push({
         authors: "",
+        authors_ja: "",
         title: "",
+        title_ja: "",
         venue: "",
+        venue_ja: "",
         venue_url: "",
         links: [],
         note: "",
+        note_ja: "",
       });
       renderPapers();
     }

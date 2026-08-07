@@ -71,6 +71,14 @@
       .join("")}</ul>`;
   };
 
+  const pickText = (item, key) => {
+    if (!item) return "";
+    if (lang === "ja") {
+      return item[`${key}_ja`] || item[key] || "";
+    }
+    return item[key] || item[`${key}_ja`] || "";
+  };
+
   const renderLinks = (links) => {
     if (!links || !links.length) return "";
     return `<span class="pub-links">${links
@@ -87,7 +95,7 @@
   };
 
   const renderVenue = (item) => {
-    const venue = item.venue || "";
+    const venue = pickText(item, "venue");
     if (!venue) return "";
     const href = safeUrl(item.venue_url);
     if (href) {
@@ -151,20 +159,21 @@
       .map((section) => {
         const items = (section.items || [])
           .map((item) => {
-            const authors = item.authors
-              ? `${escapeHtml(item.authors)}: `
-              : "";
-            const note = item.note
-              ? `<div class="pub-note">${escapeHtml(item.note)}</div>`
+            const authors = pickText(item, "authors");
+            const title = pickText(item, "title");
+            const note = pickText(item, "note");
+            const authorsHtml = authors ? `${escapeHtml(authors)}: ` : "";
+            const noteHtml = note
+              ? `<div class="pub-note">${escapeHtml(note)}</div>`
               : "";
             return `<li>
-              <div class="pub-authors">${authors}</div>
+              <div class="pub-authors">${authorsHtml}</div>
               <div class="pub-title"><strong>${escapeHtml(
-                item.title
+                title
               )}</strong>.</div>
               <div class="pub-venue-line">${renderVenue(item)}</div>
               ${renderLinks(item.links || [])}
-              ${note}
+              ${noteHtml}
             </li>`;
           })
           .join("");
