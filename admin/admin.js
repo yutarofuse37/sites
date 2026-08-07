@@ -1,7 +1,6 @@
 (() => {
   const REPO = "yutarofuse37/sites";
   const BRANCH = "main";
-  const FILE_PATH = "data/site.json";
   const TOKEN_KEY = "sites_github_token";
 
   const loginView = document.getElementById("login-view");
@@ -12,6 +11,8 @@
   const loginError = document.getElementById("login-error");
   const saveBtn = document.getElementById("save-btn");
   const statusEl = document.getElementById("status");
+  const langJaBtn = document.getElementById("lang-ja");
+  const langEnBtn = document.getElementById("lang-en");
 
   const panels = {
     profile: document.getElementById("panel-profile"),
@@ -24,6 +25,10 @@
   let token = localStorage.getItem(TOKEN_KEY) || "";
   let fileSha = "";
   let data = null;
+  let editLang = "ja";
+
+  const filePath = () =>
+    editLang === "en" ? "data/site.en.json" : "data/site.json";
 
   const api = async (path, options = {}) => {
     const res = await fetch(`https://api.github.com${path}`, {
@@ -172,6 +177,7 @@
     const sections = data.paper_sections || [];
     panels.papers.innerHTML = `
       <h2>Papers / Talks</h2>
+      <p class="status">会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
       <div id="papers-list"></div>
       <button type="button" class="btn btn--small" data-add="paper-section">＋ セクション追加</button>
     `;
@@ -179,18 +185,23 @@
     list.innerHTML = sections
       .map((section, si) => {
         const items = (section.items || [])
-          .map(
-            (item, ii) => `
+          .map((item, ii) => {
+            const linksText = (item.links || [])
+              .map((link) => `${link.label || ""}|${link.url || ""}`)
+              .join("\n");
+            return `
           <div class="item-card" data-s="${si}" data-i="${ii}">
             ${field("著者", "authors", item.authors || "")}
             ${field("タイトル", "title", item.title || "")}
             ${field("掲載先・会議名など", "venue", item.venue || "", true)}
+            ${field("会場 / 会議 HP URL", "venue_url", item.venue_url || "")}
+            ${field("追加リンク（表示名|URL）", "links", linksText, true)}
             ${field("補足", "note", item.note || "", true)}
             <div class="row-actions">
               <button type="button" class="btn btn--small btn--danger" data-remove="paper-item" data-s="${si}" data-i="${ii}">削除</button>
             </div>
-          </div>`
-          )
+          </div>`;
+          })
           .join("");
         return `
           <div class="item-card" data-s="${si}">
@@ -275,10 +286,24 @@
       const title = sectionCard.querySelector('[data-name="title"]')?.value || "";
       const items = [...sectionCard.querySelectorAll(".item-card")].map((card) => {
         const f = readFields(card);
+        const links = String(f.links || "")
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => {
+            const [label, ...rest] = line.split("|");
+            return {
+              label: (label || "").trim(),
+              url: rest.join("|").trim(),
+            };
+          })
+          .filter((link) => link.label && link.url);
         return {
           authors: f.authors || "",
           title: f.title || "",
           venue: f.venue || "",
+          venue_url: f.venue_url || "",
+          links,
           note: f.note || "",
         };
       });
@@ -311,9 +336,9 @@
   };
 
   const loadContent = async () => {
-    setStatus("GitHub から読み込み中…");
+    setStatus(`GitHub から読み込み中…（${filePath()}）`);
     const file = await api(
-      `/repos/${REPO}/contents/${FILE_PATH}?ref=${encodeURIComponent(BRANCH)}`
+      `/repos/${REPO}/contents/${filePath()}?ref=${encodeURIComponent(BRANCH)}`
     );
     fileSha = file.sha;
     const decoded = decodeURIComponent(
@@ -325,7 +350,9 @@
     );
     data = JSON.parse(decoded);
     renderAll();
-    setStatus("編集できます。保存するとサイトに反映されます。");
+    setStatus(
+      `編集中: ${filePath()} 。保存するとサイトに反映されます。`
+    );
   };
 
   const saveContent = async () => {
@@ -335,11 +362,11 @@
     setStatus("保存中…");
     saveBtn.disabled = true;
     try {
-      const result = await api(`/repos/${REPO}/contents/${FILE_PATH}`, {
+      const result = await api(`/repos/${REPO}/contents/${filePath()}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: "Update site content via admin UI",
+          message: `Update ${filePath()} via admin UI`,
           content,
           sha: fileSha,
           branch: BRANCH,
@@ -436,7 +463,7 @@
       data = collectData();
       data.paper_sections.push({
         title: "",
-        items: [{ authors: "", title: "", venue: "", note: "" }],
+        items: [{ authors: "", title: "", venue: "", venue_url: "", links: [], note: "" }],
       });
       renderPapers();
     }
@@ -451,6 +478,8 @@
         authors: "",
         title: "",
         venue: "",
+        venue_url: "",
+        links: [],
         note: "",
       });
       renderPapers();
@@ -478,6 +507,21 @@
   tokenInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") login();
   });
+
+  const switchEditLang = async (nextLang) => {
+    if (nextLang === editLang) return;
+    editLang = nextLang;
+    langJaBtn.classList.toggle("is-active", editLang === "ja");
+    langEnBtn.classList.toggle("is-active", editLang === "en");
+    try {
+      await loadContent();
+    } catch (error) {
+      setStatus(`読み込みに失敗しました: ${error.message}`, true);
+    }
+  };
+
+  langJaBtn.addEventListener("click", () => switchEditLang("ja"));
+  langEnBtn.addEventListener("click", () => switchEditLang("en"));
 
   if (token) {
     showEditor();

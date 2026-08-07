@@ -154,10 +154,95 @@ section p {
   margin: 0;
 }
 
+.pub-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.4rem;
+}
+
+.pub-list > li {
+  margin: 0 0 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.pub-authors {
+  margin-bottom: 0.15rem;
+}
+
+.pub-title {
+  margin-bottom: 0.2rem;
+}
+
+.pub-venue-line {
+  margin-bottom: 0.45rem;
+}
+
+.pub-venue {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a.pub-venue {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.pub-note {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.pub-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.12rem 0.55rem;
+  border-radius: 0.25rem;
+  background: var(--red);
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.badge:hover,
+.badge:focus-visible {
+  background: var(--red-dark);
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-left: 0.35rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.lang-switch a {
+  opacity: 0.75;
+}
+
+.lang-switch a.is-active {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 .slides {
   list-style: none;
   margin: 1rem 0 0;
   padding: 0;
+}
+
+.slides.pub-list {
+  list-style: decimal;
+  padding-left: 1.4rem;
 }
 
 .slides li {

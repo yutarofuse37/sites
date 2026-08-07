@@ -2,35 +2,31 @@
 
 布施 祐大郎（Yutaro Fuse）の個人ホームページです。
 
-**公開URL:** https://yutarofuse37.github.io/sites/
-
+**公開URL:** https://yutarofuse37.github.io/sites/  
+**English:** https://yutarofuse37.github.io/sites/en/  
 **編集画面:** https://yutarofuse37.github.io/sites/admin/
 
-## 編集のしかた（トークンログイン）
-
-GitHub の「Sign in with GitHub」は使わず、Personal Access Token で編集します。
+## 編集のしかた
 
 1. https://yutarofuse37.github.io/sites/admin/ を開く
 2. [Fine-grained token 作成](https://github.com/settings/personal-access-tokens/new)
-3. Repository access で `yutarofuse37/sites` を選択
-4. Permissions → **Contents: Read and write**
-5. 発行したトークンを編集画面に貼ってログイン
-6. プロフィール / 学歴 / 経歴 / 論文 / スライドを編集して「GitHub に保存」
+   - Repository: `yutarofuse37/sites`
+   - Contents: **Read and write**
+3. トークンを貼ってログイン
+4. 日本語 / English を切り替えて編集し、「GitHub に保存」
 
-保存すると `data/site.json` が更新され、Actions 経由でサイトに反映されます。
+Papers/Talks では会場・会議 HP の URL と、DOI などの追加リンク（`表示名|URL`）を設定できます。
 
 ## ページ
 
-- `index.html` — Home
-- `papers.html` — Papers/Talks
-- `slides.html` — Slides
+- `index.html` / `en/index.html` — Home
+- `papers.html` / `en/papers.html` — Papers/Talks
+- `slides.html` / `en/slides.html` — Slides
 - `admin/` — 編集画面
+- `data/site.json` / `data/site.en.json` — コンテンツ
 
 ## ローカルで確認
 
 ```bash
 python3 -m http.server 8080
 ```
-
-- サイト: http://localhost:8080
-- 編集画面: http://localhost:8080/admin/
