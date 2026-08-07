@@ -21,6 +21,16 @@
     papers: document.getElementById("panel-papers"),
   };
 
+  const requirePanel = (key) => {
+    const panel = panels[key];
+    if (!panel) {
+      throw new Error(
+        `編集パネル (${key}) が見つかりません。ページを再読み込みしてください。`
+      );
+    }
+    return panel;
+  };
+
   let token = localStorage.getItem(TOKEN_KEY) || "";
   let siteSha = "";
   let papersSha = "";
@@ -132,7 +142,7 @@
     const introText = (p.intro || [])
       .map((item) => (typeof item === "string" ? item : item.paragraph || ""))
       .join("\n\n");
-    panels.profile.innerHTML = `
+    requirePanel("profile").innerHTML = `
       <h2>プロフィール</h2>
       ${field("氏名（日本語）", "name_ja", p.name_ja || "")}
       ${field("氏名（英語）", "name_en", p.name_en || "")}
@@ -147,13 +157,14 @@
 
   const renderEducation = () => {
     const items = data.education || [];
-    panels.education.innerHTML = `
+    const panel = requirePanel("education");
+    panel.innerHTML = `
       <h2>学歴</h2>
       <p class="status">指導教員は「氏名|URL」を1行ずつ（清水先生のページと同じく、学歴の下に「指導教員: …」と出ます）。</p>
       <div id="education-list"></div>
       <button type="button" class="btn btn--small" data-add="education">＋ 追加</button>
     `;
-    const list = panels.education.querySelector("#education-list");
+    const list = panel.querySelector("#education-list");
     list.innerHTML = items
       .map((item, index) => {
         const advisorsText = (item.advisors || [])
@@ -174,12 +185,13 @@
 
   const renderExperience = () => {
     const groups = data.experience || [];
-    panels.experience.innerHTML = `
+    const panel = requirePanel("experience");
+    panel.innerHTML = `
       <h2>各種経歴</h2>
       <div id="experience-list"></div>
       <button type="button" class="btn btn--small" data-add="experience-group">＋ グループ追加</button>
     `;
-    const list = panels.experience.querySelector("#experience-list");
+    const list = panel.querySelector("#experience-list");
     list.innerHTML = groups
       .map((group, gi) => {
         const items = (group.items || [])
@@ -210,13 +222,14 @@
 
   const renderPapers = () => {
     const sections = papersData.paper_sections || [];
-    panels.papers.innerHTML = `
+    const panel = requirePanel("papers");
+    panel.innerHTML = `
       <h2>Papers / Talks（日英まとめて登録）</h2>
       <p class="status">1回の登録で日本語・英語の両方に反映されます。英語欄が空なら日本語欄を表示します。会場URLを入れると会場名がリンクになります。スライドURLもここに付けます。追加リンクは「表示名|URL」を1行ずつ。</p>
       <div id="papers-list"></div>
       <button type="button" class="btn btn--small" data-add="paper-section">＋ セクション追加</button>
     `;
-    const list = panels.papers.querySelector("#papers-list");
+    const list = panel.querySelector("#papers-list");
     list.innerHTML = sections
       .map((section, si) => {
         const items = (section.items || [])
@@ -274,13 +287,16 @@
   };
 
   const collectSiteData = () => {
-    const profileFields = readFields(panels.profile);
+    const profilePanel = requirePanel("profile");
+    const educationPanel = requirePanel("education");
+    const experiencePanel = requirePanel("experience");
+    const profileFields = readFields(profilePanel);
     const intro = profileFields.intro
       .split(/\n\s*\n/)
       .map((part) => part.trim())
       .filter(Boolean);
 
-    const education = [...panels.education.querySelectorAll(".item-card")].map(
+    const education = [...educationPanel.querySelectorAll(".item-card")].map(
       (card) => {
         const f = readFields(card);
         const advisors = String(f.advisors || "")
@@ -304,7 +320,7 @@
     );
 
     const experience = [];
-    panels.experience
+    experiencePanel
       .querySelectorAll(":scope > #experience-list > .item-card")
       .forEach((groupCard) => {
         const title =
@@ -336,7 +352,7 @@
 
   const collectPapersData = () => {
     const paper_sections = [];
-    panels.papers
+    requirePanel("papers")
       .querySelectorAll(":scope > #papers-list > .item-card")
       .forEach((sectionCard) => {
         const title =
@@ -449,7 +465,14 @@
       await api("/user");
       localStorage.setItem(TOKEN_KEY, token);
       showEditor();
-      await loadContent();
+      try {
+        await loadContent();
+      } catch (loadError) {
+        setStatus(`読み込みに失敗しました: ${loadError.message}`, true);
+        showLogin(
+          `ログインはできましたが、内容の読み込みに失敗しました: ${loadError.message}。ページを再読み込みしてください。`
+        );
+      }
     } catch (error) {
       token = "";
       localStorage.removeItem(TOKEN_KEY);
