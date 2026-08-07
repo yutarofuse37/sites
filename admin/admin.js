@@ -436,6 +436,7 @@
     data = JSON.parse(decodeGithubFile(siteFile));
     papersData = JSON.parse(decodeGithubFile(papersFile));
     if (!papersData.paper_sections) papersData.paper_sections = [];
+    if (!data.links) data.links = [];
     renderAll();
     setStatus(
       activeTab === "papers"
@@ -661,6 +662,7 @@
       );
       siteSha = siteFile.sha;
       data = JSON.parse(decodeGithubFile(siteFile));
+      if (!data.links) data.links = [];
       renderProfile();
       renderEducation();
       renderExperience();
