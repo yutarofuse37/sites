@@ -5,14 +5,28 @@
     "affiliation": "Master's student, Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo",
     "lab_name": "Shioura Laboratory",
     "lab_url": "http://www.shioura-lab.iee.e.titech.ac.jp/",
+    "photo": "assets/uploads/product (1).jpeg",
     "email": "fuse.y.6680 [at] m.isct.ac.jp",
     "description": "Yutaro Fuse, Shioura Laboratory, Institute of Science Tokyo. Research interests: discrete optimization, operations research, and network flows.",
     "intro": [
       "I am a master's student at the Shioura Laboratory, Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo. My research interests include combinatorial optimization, operations research, and network flows."
     ],
-    "photo": "",
     "url_note": "The “37” in the site URL is to distinguish this page from others with the same name."
   },
+  "links": [
+    {
+      "label": "researchmap",
+      "url": "https://researchmap.jp/yutaro_fuse?lang=en"
+    },
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com/citations?hl=en&user=CvAv3roAAAAJ"
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0009-0006-3757-3541"
+    }
+  ],
   "education": [
     {
       "period": "Apr 2025 — Present",
@@ -77,20 +91,6 @@
           "detail": "Mathematics for Management and Economics (Institute of Science Tokyo), Instructor: Prof. Akiyoshi Shioura"
         }
       ]
-    }
-  ],
-  "links": [
-    {
-      "label": "researchmap",
-      "url": "https://researchmap.jp/yutaro_fuse?lang=en"
-    },
-    {
-      "label": "Google Scholar",
-      "url": "https://scholar.google.com/citations?hl=en&user=CvAv3roAAAAJ"
-    },
-    {
-      "label": "ORCID",
-      "url": "https://orcid.org/0009-0006-3757-3541"
     }
   ]
 }
