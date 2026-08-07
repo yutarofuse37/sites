@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FUSE — Yutaro Fuse</title>
+    <title>布施 祐大郎 — Yutaro Fuse</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <meta
       name="description"
-      content="Yutaro Fuse のポートフォリオ。デザインとエンジニアリングのあいだで、静かな体験をつくる。"
+      content="東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎。離散最適化・オペレーションズ・リサーチ・ネットワークフローを研究しています。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -21,10 +21,11 @@
     <a class="skip-link" href="#main">本文へスキップ</a>
 
     <header class="site-header">
-      <a class="logo" href="#top" aria-label="FUSE ホーム">FUSE</a>
+      <a class="logo" href="#top" aria-label="ホーム">Yutaro Fuse</a>
       <nav class="nav" aria-label="メインナビ">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
+        <a href="#about">自己紹介</a>
+        <a href="#papers">Papers/Talks</a>
+        <a href="#slides">Slides</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -33,7 +34,7 @@
       <section class="hero" id="top" aria-label="ヒーロー">
         <div class="hero__media" aria-hidden="true">
           <img
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2400&q=80"
             alt=""
             width="2400"
             height="1600"
@@ -42,15 +43,15 @@
         </div>
 
         <div class="hero__content">
-          <p class="brand reveal" data-reveal>FUSE</p>
+          <p class="brand reveal" data-reveal>布施 祐大郎</p>
           <h1 class="reveal" data-reveal>
-            静けさのなかで、<br />確かな体験をつくる。
+            離散最適化とネットワークフローを研究しています。
           </h1>
           <p class="lede reveal" data-reveal>
-            デザインとエンジニアリングを横断し、余白とリズムのあるデジタル空間を設計しています。
+            東京科学大学 工学院 経営工学系 塩浦研究室 / Yutaro Fuse
           </p>
           <div class="cta-group reveal" data-reveal>
-            <a class="cta cta--primary" href="#work">作品を見る</a>
+            <a class="cta cta--primary" href="#papers">論文・発表を見る</a>
             <a class="cta cta--ghost" href="#contact">連絡する</a>
           </div>
         </div>
@@ -58,49 +59,211 @@
 
       <section class="section about" id="about">
         <div class="section__inner">
-          <p class="eyebrow reveal" data-reveal>About</p>
-          <h2 class="reveal" data-reveal>線を引き、余白を残す。</h2>
+          <p class="eyebrow reveal" data-reveal>自己紹介</p>
+          <h2 class="reveal" data-reveal>布施 祐大郎（ふせ ゆうたろう）</h2>
           <p class="section__copy reveal" data-reveal>
-            情報を詰め込むのではなく、見る人の視線が自然に流れる構成を大切にしています。
-            ウェブ、プロダクト、ブランド——媒体を問わず、触れた瞬間に空気が変わる体験を目指しています。
+            東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎です。
+            離散最適化、オペレーションズ・リサーチ、特にネットワークフローに関連するものを研究しています。
           </p>
         </div>
       </section>
 
-      <section class="section work" id="work">
+      <section class="section education" id="education">
         <div class="section__inner">
-          <p class="eyebrow reveal" data-reveal>Selected Work</p>
-          <h2 class="reveal" data-reveal>最近の取り組み</h2>
+          <p class="eyebrow reveal" data-reveal>学歴</p>
+          <h2 class="reveal" data-reveal>Education</h2>
+          <ul class="timeline">
+            <li class="reveal" data-reveal>
+              <span class="timeline__period">2025年4月 — 現在</span>
+              <p>
+                東京科学大学 工学院 経営工学系 経営工学コース 修士課程
+              </p>
+            </li>
+            <li class="reveal" data-reveal>
+              <span class="timeline__period">2021年4月 — 2025年3月</span>
+              <p>
+                東京科学大学（東京工業大学）工学院 経営工学系 卒業
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-          <ul class="work-list">
-            <li class="work-item reveal" data-reveal>
-              <a href="#contact">
-                <span class="work-item__index">01</span>
-                <div class="work-item__body">
-                  <h3>Atelier Landing</h3>
-                  <p>ブランドの空気感を一枚の画面に凝縮したランディングページ。</p>
+      <section class="section experience" id="experience">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>各種経歴</p>
+          <h2 class="reveal" data-reveal>Experience</h2>
+
+          <div class="exp-block reveal" data-reveal>
+            <h3>リサーチ・アシスタント（RA）</h3>
+            <ul class="timeline">
+              <li>
+                <span class="timeline__period">2025年10月 — 現在</span>
+                <p>
+                  JST ERATO 小島マーケットデザインプロジェクト 離散数学グループ
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="exp-block reveal" data-reveal>
+            <h3>ティーチング・アシスタント（TA）</h3>
+            <ul class="timeline timeline--dense">
+              <li>
+                <span class="timeline__period">2025年12月</span>
+                <p>
+                  R7年度 オペレーションズ・リサーチ 基礎（東京科学大学 工学院
+                  経営工学系）、担当教員：塩浦 昭義 教授
+                </p>
+              </li>
+              <li>
+                <span class="timeline__period">2025年12月</span>
+                <p>
+                  R7年度 先端経営工学（東京科学大学 工学院
+                  経営工学系）、担当教員：塩浦 昭義 教授
+                </p>
+              </li>
+              <li>
+                <span class="timeline__period">2025年10月</span>
+                <p>
+                  R7年度 プログラミング応用（東京科学大学 工学院
+                  経営工学系）、担当教員：清水 伸高 助教
+                </p>
+              </li>
+              <li>
+                <span class="timeline__period">2025年10月</span>
+                <p>
+                  R7年度 離散最適化の理論と応用（東京科学大学 工学院 経営工学系
+                  経営工学コース）、担当教員：塩浦 昭義 教授
+                </p>
+              </li>
+              <li>
+                <span class="timeline__period">2025年6月</span>
+                <p>
+                  R7年度 経営・経済数学（東京科学大学 工学院
+                  経営工学系）、担当教員：塩浦 昭義 教授
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section papers" id="papers">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>Papers / Talks</p>
+          <h2 class="reveal" data-reveal>論文・発表</h2>
+
+          <div class="pub-group reveal" data-reveal>
+            <h3>Journal Paper (Peer-Reviewed)</h3>
+            <article class="pub">
+              <p class="pub__authors">
+                Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu and Akiyoshi Shioura.
+              </p>
+              <p class="pub__title">
+                An Efficient Algorithm for Computing Average Network Flow
+              </p>
+              <p class="pub__venue">
+                <em>Journal of the Operations Research Society of Japan</em>,
+                Vol. 69, No. 2, April 2026, pp. 39–46.
+              </p>
+              <p class="pub__note">Preliminary version appeared in WAAC 2025.</p>
+            </article>
+          </div>
+
+          <div class="pub-group reveal" data-reveal>
+            <h3>International Conferences (Peer-Reviewed)</h3>
+            <article class="pub">
+              <p class="pub__title">
+                An Efficient Algorithm for Computing Average Network Flow
+              </p>
+              <p class="pub__venue">
+                The 25th Japan–Korea Joint Workshop on Algorithms and Computation
+                (WAAC 2025), Hokkaido University, Sapporo, Japan, August 19–20,
+                2025.
+              </p>
+            </article>
+          </div>
+
+          <div class="pub-group reveal" data-reveal>
+            <h3>Domestic Conferences / Workshops / Symposiums</h3>
+            <article class="pub">
+              <p class="pub__authors">布施 祐大郎，清水 伸高</p>
+              <p class="pub__title">
+                Multiplicative Weights Update for Absolute Algebraic Connectivity
+              </p>
+              <p class="pub__venue">
+                2026年度 夏のLAシンポジウム，水戸市民会館，2026年7月27日–29日。
+              </p>
+            </article>
+            <article class="pub">
+              <p class="pub__authors">布施 祐大郎，清水 伸高，塩浦 昭義</p>
+              <p class="pub__title">
+                Average Network Flow 最大化問題に対する近似解法
+              </p>
+              <p class="pub__venue">
+                2025年度 冬のLAシンポジウム，京都大学数理解析研究所，2026年1月26日–28日。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section slides" id="slides">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>Slides</p>
+          <h2 class="reveal" data-reveal>スライド</h2>
+          <ul class="slide-list">
+            <li class="reveal" data-reveal>
+              <a
+                href="https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="slide-list__label">Talk</span>
+                <div>
+                  <h3>Multiplicative Weights Update for Absolute Algebraic Connectivity</h3>
+                  <p>夏のLAシンポジウム2026 / 布施 祐大郎，清水 伸高</p>
                 </div>
-                <span class="work-item__meta">Web / Brand</span>
               </a>
             </li>
-            <li class="work-item reveal" data-reveal>
-              <a href="#contact">
-                <span class="work-item__index">02</span>
-                <div class="work-item__body">
-                  <h3>Signal Dashboard</h3>
-                  <p>複雑なデータを静かなUIへ翻訳した運用画面の再設計。</p>
+            <li class="reveal" data-reveal>
+              <a
+                href="https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="slide-list__label">Talk</span>
+                <div>
+                  <h3>Average Network Flow 最大化問題に対する近似解法</h3>
+                  <p>冬のLAシンポジウム2025 / 布施 祐大郎，清水 伸高，塩浦 昭義</p>
                 </div>
-                <span class="work-item__meta">Product</span>
               </a>
             </li>
-            <li class="work-item reveal" data-reveal>
-              <a href="#contact">
-                <span class="work-item__index">03</span>
-                <div class="work-item__body">
-                  <h3>Paper Archive</h3>
-                  <p>読みやすさを軸にしたアーカイブサイトとタイポグラフィ設計。</p>
+            <li class="reveal" data-reveal>
+              <a
+                href="https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="slide-list__label">Talk</span>
+                <div>
+                  <h3>An Efficient Algorithm for Computing Average Network Flow</h3>
+                  <p>WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, Akiyoshi Shioura</p>
                 </div>
-                <span class="work-item__meta">Editorial</span>
+              </a>
+            </li>
+            <li class="reveal" data-reveal>
+              <a
+                href="https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="slide-list__label">Rinko</span>
+                <div>
+                  <h3>輪講資料</h3>
+                  <p>経営工学・経済学輪講（最小カット / 辺連結度増加など）</p>
+                </div>
               </a>
             </li>
           </ul>
@@ -110,20 +273,31 @@
       <section class="section contact" id="contact">
         <div class="section__inner">
           <p class="eyebrow reveal" data-reveal>Contact</p>
-          <h2 class="reveal" data-reveal>一緒に、つくりましょう。</h2>
+          <h2 class="reveal" data-reveal>連絡先</h2>
           <p class="section__copy reveal" data-reveal>
-            新規サイト、リデザイン、プロトタイプのご相談など、お気軽にご連絡ください。
+            ご連絡は下記のメールアドレスまでお願いいたします。
           </p>
-          <a class="cta cta--primary reveal" data-reveal href="mailto:hello@fuse.studio"
-            >hello@fuse.studio</a
+          <a
+            class="cta cta--primary reveal"
+            data-reveal
+            href="mailto:fuse.y.6680@m.isct.ac.jp"
+            >fuse.y.6680 [at] m.isct.ac.jp</a
           >
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="year"></span> FUSE</p>
-      <p class="site-footer__note">Crafted with quiet intention.</p>
+      <p>© <span id="year"></span> Yutaro Fuse</p>
+      <p class="site-footer__note">
+        Based on
+        <a
+          href="https://sites.google.com/view/yutaro-fuse/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Google Sites</a
+        >
+      </p>
     </footer>
 
     <script src="./main.js"></script>
