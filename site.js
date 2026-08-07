@@ -178,10 +178,8 @@
       .filter(Boolean)
       .join("");
     if (!items) return "";
-    return `<section>
-      <h2>${copy.links}</h2>
-      <ul class="link-map">${items}</ul>
-    </section>`;
+    return `<h3>${copy.links}</h3>
+      <ul class="link-map">${items}</ul>`;
   };
 
   const renderHome = (data, root) => {
@@ -216,9 +214,9 @@
       <section>
         <h2>${copy.about}</h2>
         ${intro}
+        ${renderLinkMap(data.links)}
         <p>${copy.papersHint}</p>
       </section>
-      ${renderLinkMap(data.links)}
       <section>
         <h2>${copy.education}</h2>
         ${renderEducation(data.education || [])}
