@@ -25,8 +25,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html papers.html styles.css site.js favicon.svg .nojekyll _site/
-          cp -r data admin en _site/
-          mkdir -p _site/assets/uploads
+          cp -r data admin en assets _site/
           rm -f _site/admin/config.yml
 
       - name: Upload artifact
