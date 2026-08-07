@@ -54,27 +54,5 @@
         }
       ]
     }
-  ],
-  "slides": [
-    {
-      "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
-      "url": "https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc",
-      "meta": "夏のLAシンポジウム2026 / 布施 祐大郎，清水 伸高"
-    },
-    {
-      "title": "Average Network Flow 最大化問題に対する近似解法",
-      "url": "https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_",
-      "meta": "冬のLAシンポジウム2025 / 布施 祐大郎，清水 伸高，塩浦 昭義"
-    },
-    {
-      "title": "An Efficient Algorithm for Computing Average Network Flow",
-      "url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
-      "meta": "WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, Akiyoshi Shioura"
-    },
-    {
-      "title": "輪講資料",
-      "url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
-      "meta": "経営工学・経済学輪講（最小カット / 辺連結度増加など）"
-    }
   ]
 }

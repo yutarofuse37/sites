@@ -16,16 +16,15 @@
 4. 日本語 / English を切り替えて編集し、「GitHub に保存」
 
 Papers/Talks は `data/papers.json` にまとめて登録します（1回の編集で日英両方に反映）。
-各業績に英語欄・日本語欄を持てます。会場・会議 HP の URL と DOI などの追加リンク（`表示名|URL`）もここで設定できます。
+各業績に英語欄・日本語欄を持てます。会場・会議 HP の URL、スライド URL、DOI などの追加リンク（`表示名|URL`）もここで設定できます。
 
 ## ページ
 
 - `index.html` / `en/index.html` — Home
-- `papers.html` / `en/papers.html` — Papers/Talks
-- `slides.html` / `en/slides.html` — Slides
+- `papers.html` / `en/papers.html` — Papers/Talks（スライドリンク付き）
 - `admin/` — 編集画面
-- `data/site.json` / `data/site.en.json` — プロフィール・学歴・経歴・スライド
-- `data/papers.json` — Papers/Talks（日英共通）
+- `data/site.json` / `data/site.en.json` — プロフィール・学歴・経歴
+- `data/papers.json` — Papers/Talks（日英共通・スライド含む）
 
 ## ローカルで確認
 

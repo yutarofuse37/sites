@@ -54,27 +54,5 @@
         }
       ]
     }
-  ],
-  "slides": [
-    {
-      "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
-      "url": "https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc",
-      "meta": "Summer LA Symposium 2026 / Yutaro Fuse and Nobutaka Shimizu"
-    },
-    {
-      "title": "Approximation Algorithms for the Average Network Flow Maximization Problem",
-      "url": "https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_",
-      "meta": "Winter LA Symposium 2025 / Yutaro Fuse, Nobutaka Shimizu, and Akiyoshi Shioura"
-    },
-    {
-      "title": "An Efficient Algorithm for Computing Average Network Flow",
-      "url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
-      "meta": "WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura"
-    },
-    {
-      "title": "Seminar Notes",
-      "url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
-      "meta": "Seminar on Industrial Engineering and Economics (min-cut / edge-connectivity augmentation, etc.)"
-    }
   ]
 }

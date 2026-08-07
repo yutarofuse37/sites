@@ -18,10 +18,8 @@
           about: "About",
           education: "Education",
           experience: "Experience",
-          papersHint:
-            'See <a href="./papers.html">Papers/Talks</a> and <a href="./slides.html">Slides</a>.',
+          papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
           papersTitle: "Papers / Talks",
-          slidesTitle: "Slides",
           emailLabel: "e-mail",
         }
       : {
@@ -32,9 +30,8 @@
           education: "学歴",
           experience: "各種経歴",
           papersHint:
-            '論文・発表は <a href="./papers.html">Papers/Talks</a>，スライドは <a href="./slides.html">Slides</a> を参照してください。',
+            '論文・発表は <a href="./papers.html">Papers/Talks</a> を参照してください。',
           papersTitle: "Papers / Talks",
-          slidesTitle: "Slides",
           emailLabel: "e-mail",
         };
 
@@ -79,19 +76,32 @@
     return item[key] || item[`${key}_ja`] || "";
   };
 
-  const renderLinks = (links) => {
-    if (!links || !links.length) return "";
-    return `<span class="pub-links">${links
-      .map((link) => {
-        const href = safeUrl(link.url);
-        if (!href || !link.label) return "";
-        return `<a class="badge" href="${escapeHtml(
+  const renderLinks = (item) => {
+    const badges = [];
+    const links = item.links || [];
+    for (const link of links) {
+      const href = safeUrl(link.url);
+      if (!href || !link.label) continue;
+      badges.push(
+        `<a class="badge" href="${escapeHtml(
           href
         )}" target="_blank" rel="noopener noreferrer">${escapeHtml(
           link.label
-        )}</a>`;
-      })
-      .join("")}</span>`;
+        )}</a>`
+      );
+    }
+    const slideHref = safeUrl(item.slide_url);
+    if (slideHref) {
+      const label =
+        item.slide_label || (lang === "ja" ? "スライド" : "Slides");
+      badges.push(
+        `<a class="badge badge--slide" href="${escapeHtml(
+          slideHref
+        )}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
+      );
+    }
+    if (!badges.length) return "";
+    return `<span class="pub-links">${badges.join("")}</span>`;
   };
 
   const renderVenue = (item) => {
@@ -172,7 +182,7 @@
                 title
               )}</strong>.</div>
               <div class="pub-venue-line">${renderVenue(item)}</div>
-              ${renderLinks(item.links || [])}
+              ${renderLinks(item)}
               ${noteHtml}
             </li>`;
           })
@@ -187,27 +197,6 @@
     root.innerHTML = `<h1>${copy.papersTitle}</h1>${sections}`;
   };
 
-  const renderSlides = (data, root) => {
-    const items = (data.slides || [])
-      .map((slide) => {
-        const href = safeUrl(slide.url);
-        const meta = slide.meta
-          ? `<span class="slides__meta">${escapeHtml(slide.meta)}</span>`
-          : "";
-        const title = href
-          ? `<a href="${escapeHtml(
-              href
-            )}" target="_blank" rel="noopener noreferrer">${escapeHtml(
-              slide.title
-            )}</a>`
-          : escapeHtml(slide.title);
-        return `<li>${title}${meta}</li>`;
-      })
-      .join("");
-
-    root.innerHTML = `<h1>${copy.slidesTitle}</h1><ol class="slides pub-list" reversed>${items}</ol>`;
-  };
-
   const papersUrl =
     lang === "en" ? "../data/papers.json" : "./data/papers.json";
 
@@ -215,12 +204,7 @@
   document.querySelectorAll("[data-lang-link]").forEach((el) => {
     const target = el.getAttribute("data-lang-link");
     const page = document.body.dataset.page || "home";
-    const file =
-      page === "home"
-        ? "index.html"
-        : page === "papers"
-          ? "papers.html"
-          : "slides.html";
+    const file = page === "papers" ? "papers.html" : "index.html";
     el.href = target === "en" ? `${enBase}${file}` : `${base}${file}`;
   });
 
@@ -243,12 +227,9 @@
         console.error(error);
         root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
       });
-  } else {
+  } else if (page === "home") {
     loadJson(dataUrl)
-      .then((data) => {
-        if (page === "home") renderHome(data, root);
-        else if (page === "slides") renderSlides(data, root);
-      })
+      .then((data) => renderHome(data, root))
       .catch((error) => {
         console.error(error);
         root.innerHTML = `<p class="meta">${copy.loadError}</p>`;

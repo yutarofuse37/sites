@@ -19,7 +19,6 @@
     education: document.getElementById("panel-education"),
     experience: document.getElementById("panel-experience"),
     papers: document.getElementById("panel-papers"),
-    slides: document.getElementById("panel-slides"),
   };
 
   let token = localStorage.getItem(TOKEN_KEY) || "";
@@ -206,7 +205,7 @@
     const sections = papersData.paper_sections || [];
     panels.papers.innerHTML = `
       <h2>Papers / Talks（日英まとめて登録）</h2>
-      <p class="status">1回の登録で日本語・英語の両方に反映されます。英語欄が空なら日本語欄を表示します。会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
+      <p class="status">1回の登録で日本語・英語の両方に反映されます。英語欄が空なら日本語欄を表示します。会場URLを入れると会場名がリンクになります。スライドURLもここに付けます。追加リンクは「表示名|URL」を1行ずつ。</p>
       <div id="papers-list"></div>
       <button type="button" class="btn btn--small" data-add="paper-section">＋ セクション追加</button>
     `;
@@ -227,6 +226,8 @@
             ${field("掲載先・会議名（英語）", "venue", item.venue || "", true)}
             ${field("掲載先・会議名（日本語）", "venue_ja", item.venue_ja || "", true)}
             ${field("会場 / 会議 HP URL", "venue_url", item.venue_url || "")}
+            ${field("スライド URL", "slide_url", item.slide_url || "")}
+            ${field("スライド表示名（空なら「スライド」/ Slides）", "slide_label", item.slide_label || "")}
             ${field("追加リンク（表示名|URL）", "links", linksText, true)}
             ${field("補足（英語）", "note", item.note || "", true)}
             ${field("補足（日本語）", "note_ja", item.note_ja || "", true)}
@@ -250,35 +251,11 @@
       .join("");
   };
 
-  const renderSlides = () => {
-    const items = data.slides || [];
-    panels.slides.innerHTML = `
-      <h2>Slides</h2>
-      <div id="slides-list"></div>
-      <button type="button" class="btn btn--small" data-add="slide">＋ 追加</button>
-    `;
-    const list = panels.slides.querySelector("#slides-list");
-    list.innerHTML = items
-      .map(
-        (item, index) => `
-      <div class="item-card" data-index="${index}">
-        ${field("タイトル", "title", item.title || "")}
-        ${field("URL", "url", item.url || "")}
-        ${field("補足", "meta", item.meta || "")}
-        <div class="row-actions">
-          <button type="button" class="btn btn--small btn--danger" data-remove="slide" data-index="${index}">削除</button>
-        </div>
-      </div>`
-      )
-      .join("");
-  };
-
   const renderAll = () => {
     renderProfile();
     renderEducation();
     renderExperience();
     renderPapers();
-    renderSlides();
   };
 
   const readFields = (root) => {
@@ -318,17 +295,6 @@
         experience.push({ title, items });
       });
 
-    const slides = [...panels.slides.querySelectorAll(".item-card")].map(
-      (card) => {
-        const f = readFields(card);
-        return {
-          title: f.title || "",
-          url: f.url || "",
-          meta: f.meta || "",
-        };
-      }
-    );
-
     return {
       profile: {
         name_ja: profileFields.name_ja || "",
@@ -340,7 +306,6 @@
       },
       education,
       experience,
-      slides,
     };
   };
 
@@ -366,7 +331,7 @@
                 };
               })
               .filter((link) => link.label && link.url);
-            return {
+            const entry = {
               authors: f.authors || "",
               authors_ja: f.authors_ja || "",
               title: f.title || "",
@@ -378,6 +343,9 @@
               note: f.note || "",
               note_ja: f.note_ja || "",
             };
+            if (f.slide_url) entry.slide_url = f.slide_url;
+            if (f.slide_label) entry.slide_label = f.slide_label;
+            return entry;
           }
         );
         paper_sections.push({ title, items });
@@ -552,6 +520,8 @@
             venue: "",
             venue_ja: "",
             venue_url: "",
+            slide_url: "",
+            slide_label: "",
             links: [],
             note: "",
             note_ja: "",
@@ -575,6 +545,8 @@
         venue: "",
         venue_ja: "",
         venue_url: "",
+        slide_url: "",
+        slide_label: "",
         links: [],
         note: "",
         note_ja: "",
@@ -588,16 +560,6 @@
         1
       );
       renderPapers();
-    }
-    if (btn.dataset.add === "slide") {
-      data = collectSiteData();
-      data.slides.push({ title: "", url: "", meta: "" });
-      renderSlides();
-    }
-    if (btn.dataset.remove === "slide") {
-      data = collectSiteData();
-      data.slides.splice(Number(btn.dataset.index), 1);
-      renderSlides();
     }
   });
 
@@ -631,7 +593,6 @@
       renderProfile();
       renderEducation();
       renderExperience();
-      renderSlides();
       setStatus(
         activeTab === "papers"
           ? `編集中: ${papersFilePath}（日英共通）。保存で両方の Papers/Talks に反映されます。`
