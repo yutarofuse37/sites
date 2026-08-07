@@ -17,6 +17,7 @@
   const panels = {
     profile: document.getElementById("panel-profile"),
     education: document.getElementById("panel-education"),
+    advisors: document.getElementById("panel-advisors"),
     experience: document.getElementById("panel-experience"),
     papers: document.getElementById("panel-papers"),
   };
@@ -137,10 +138,36 @@
       ${field("氏名（日本語）", "name_ja", p.name_ja || "")}
       ${field("氏名（英語）", "name_en", p.name_en || "")}
       ${field("所属", "affiliation", p.affiliation || "")}
+      ${field("研究室名（所属・紹介文中でリンク化）", "lab_name", p.lab_name || "")}
+      ${field("研究室 URL", "lab_url", p.lab_url || "")}
       ${field("メール（表示用・リンクなし）", "email", p.email || "")}
       ${field("サイト説明（SEO）", "description", p.description || "", true)}
       ${field("自己紹介（段落は空行で区切る）", "intro", introText, true)}
     `;
+  };
+
+  const renderAdvisors = () => {
+    const items = data.advisors || [];
+    panels.advisors.innerHTML = `
+      <h2>指導教員</h2>
+      <p class="status">氏名にホームページ URL を付けるとリンクになります。</p>
+      <div id="advisors-list"></div>
+      <button type="button" class="btn btn--small" data-add="advisor">＋ 追加</button>
+    `;
+    const list = panels.advisors.querySelector("#advisors-list");
+    list.innerHTML = items
+      .map(
+        (item, index) => `
+      <div class="item-card" data-index="${index}">
+        ${field("氏名", "name", item.name || "")}
+        ${field("役職（教授・助教など）", "role", item.role || "")}
+        ${field("ホームページ URL", "url", item.url || "")}
+        <div class="row-actions">
+          <button type="button" class="btn btn--small btn--danger" data-remove="advisor" data-index="${index}">削除</button>
+        </div>
+      </div>`
+      )
+      .join("");
   };
 
   const renderEducation = () => {
@@ -253,6 +280,7 @@
 
   const renderAll = () => {
     renderProfile();
+    renderAdvisors();
     renderEducation();
     renderExperience();
     renderPapers();
@@ -295,15 +323,29 @@
         experience.push({ title, items });
       });
 
+    const advisors = [
+      ...panels.advisors.querySelectorAll("#advisors-list > .item-card"),
+    ].map((card) => {
+      const f = readFields(card);
+      return {
+        name: f.name || "",
+        role: f.role || "",
+        url: f.url || "",
+      };
+    });
+
     return {
       profile: {
         name_ja: profileFields.name_ja || "",
         name_en: profileFields.name_en || "",
         affiliation: profileFields.affiliation || "",
+        lab_name: profileFields.lab_name || "",
+        lab_url: profileFields.lab_url || "",
         email: profileFields.email || "",
         description: profileFields.description || "",
         intro,
       },
+      advisors,
       education,
       experience,
     };
@@ -372,6 +414,7 @@
     data = JSON.parse(decodeGithubFile(siteFile));
     papersData = JSON.parse(decodeGithubFile(papersFile));
     if (!papersData.paper_sections) papersData.paper_sections = [];
+    if (!data.advisors) data.advisors = [];
     renderAll();
     setStatus(
       activeTab === "papers"
@@ -480,6 +523,18 @@
       data = collectSiteData();
       data.education.splice(Number(btn.dataset.index), 1);
       renderEducation();
+    }
+    if (btn.dataset.add === "advisor") {
+      data = collectSiteData();
+      data.advisors = data.advisors || [];
+      data.advisors.push({ name: "", role: "", url: "" });
+      renderAdvisors();
+    }
+    if (btn.dataset.remove === "advisor") {
+      data = collectSiteData();
+      data.advisors = data.advisors || [];
+      data.advisors.splice(Number(btn.dataset.index), 1);
+      renderAdvisors();
     }
     if (btn.dataset.add === "experience-group") {
       data = collectSiteData();
@@ -590,7 +645,9 @@
       );
       siteSha = siteFile.sha;
       data = JSON.parse(decodeGithubFile(siteFile));
+      if (!data.advisors) data.advisors = [];
       renderProfile();
+      renderAdvisors();
       renderEducation();
       renderExperience();
       setStatus(

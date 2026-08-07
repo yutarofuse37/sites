@@ -16,6 +16,7 @@
           loading: "Loading…",
           loadError: "Failed to load content. Please try again later.",
           about: "About",
+          advisors: "Advisors",
           education: "Education",
           experience: "Experience",
           papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
@@ -27,6 +28,7 @@
           loadError:
             "内容の読み込みに失敗しました。しばらくしてから再度お試しください。",
           about: "自己紹介",
+          advisors: "指導教員",
           education: "学歴",
           experience: "各種経歴",
           papersHint:
@@ -116,17 +118,64 @@
     return `<span class="pub-venue">${escapeHtml(venue)}</span>`;
   };
 
+  const linkifyLabName = (text, labName, labUrl) => {
+    const safe = escapeHtml(text);
+    if (!labName || !labUrl) return safe;
+    const nameEsc = escapeHtml(labName);
+    if (!safe.includes(nameEsc)) return safe;
+    const href = escapeHtml(labUrl);
+    return safe.split(nameEsc).join(
+      `<a href="${href}" target="_blank" rel="noopener noreferrer">${nameEsc}</a>`
+    );
+  };
+
+  const renderAffiliation = (profile) => {
+    const labUrl = safeUrl(profile.lab_url);
+    return linkifyLabName(
+      profile.affiliation || "",
+      profile.lab_name || "",
+      labUrl
+    );
+  };
+
+  const renderAdvisors = (advisors) => {
+    if (!advisors || !advisors.length) return "";
+    const items = advisors
+      .map((person) => {
+        const name = escapeHtml(person.name || "");
+        if (!name) return "";
+        const role = person.role ? `（${escapeHtml(person.role)}）` : "";
+        const href = safeUrl(person.url);
+        const nameHtml = href
+          ? `<a href="${escapeHtml(
+              href
+            )}" target="_blank" rel="noopener noreferrer">${name}</a>`
+          : name;
+        return `<li>${nameHtml}${role}</li>`;
+      })
+      .filter(Boolean)
+      .join("");
+    if (!items) return "";
+    return `<section>
+      <h2>${copy.advisors}</h2>
+      <ul class="list list--plain">${items}</ul>
+    </section>`;
+  };
+
   const renderHome = (data, root) => {
     const p = data.profile || {};
     const displayName =
       lang === "en" ? p.name_en || p.name_ja : p.name_ja || p.name_en;
+    const labUrl = safeUrl(p.lab_url);
     const intro = (p.intro || [])
       .map((paragraph) => {
         const text =
           typeof paragraph === "string"
             ? paragraph
             : paragraph.paragraph || paragraph.body || "";
-        return text ? `<p>${escapeHtml(text)}</p>` : "";
+        return text
+          ? `<p>${linkifyLabName(text, p.lab_name || "", labUrl)}</p>`
+          : "";
       })
       .join("");
 
@@ -139,9 +188,10 @@
 
     root.innerHTML = `
       <h1>${escapeHtml(displayName)}</h1>
-      <p class="meta">${escapeHtml(p.affiliation)}<br />${
+      <p class="meta">${renderAffiliation(p)}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
+      ${renderAdvisors(data.advisors)}
       <section>
         <h2>${copy.about}</h2>
         ${intro}

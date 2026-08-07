@@ -3,12 +3,26 @@
     "name_ja": "布施 祐大郎（ふせ ゆうたろう）",
     "name_en": "Yutaro Fuse",
     "affiliation": "東京科学大学 工学院 経営工学系 塩浦研究室 修士課程",
+    "lab_name": "塩浦研究室",
+    "lab_url": "http://www.shioura-lab.iee.e.titech.ac.jp/",
     "email": "fuse.y.6680 [at] m.isct.ac.jp",
     "description": "東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎。離散最適化・オペレーションズ・リサーチ・ネットワークフローを研究しています。",
     "intro": [
       "東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎です。離散最適化，オペレーションズ・リサーチ，特にネットワークフローに関連するものを研究しています。"
     ]
   },
+  "advisors": [
+    {
+      "name": "塩浦 昭義",
+      "role": "教授",
+      "url": "http://www.shioura-lab.iee.e.titech.ac.jp/shioura/index-j.html"
+    },
+    {
+      "name": "清水 伸高",
+      "role": "助教",
+      "url": "https://sites.google.com/view/nobutaka-shimizu/home"
+    }
+  ],
   "education": [
     {
       "period": "2025年4月 — 現在",
