@@ -76,5 +76,19 @@
         }
       ]
     }
+  ],
+  "links": [
+    {
+      "label": "researchmap",
+      "url": "https://researchmap.jp/yutaro_fuse?lang=en"
+    },
+    {
+      "label": "Google Scholar",
+      "url": ""
+    },
+    {
+      "label": "ORCID",
+      "url": "https://orcid.org/0009-0006-3757-3541"
+    }
   ]
 }

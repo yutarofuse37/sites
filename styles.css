@@ -150,6 +150,20 @@ section p {
   font-size: 0.95rem;
 }
 
+.link-map {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.link-map li {
+  padding: 0.35rem 0;
+}
+
+.link-map li + li {
+  border-top: 1px solid var(--line);
+}
+
 .pub {
   margin: 0 0 1.1rem;
   padding-bottom: 1rem;

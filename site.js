@@ -19,6 +19,7 @@
           education: "Education",
           experience: "Experience",
           advisorLabel: "Advisor",
+          links: "Links",
           papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
@@ -31,6 +32,7 @@
           education: "学歴",
           experience: "各種経歴",
           advisorLabel: "指導教員",
+          links: "リンクマップ",
           papersHint:
             '論文・発表は <a href="./papers.html">Papers/Talks</a> を参照してください。',
           papersTitle: "Papers / Talks",
@@ -162,6 +164,26 @@
     );
   };
 
+  const renderLinkMap = (links) => {
+    if (!links || !links.length) return "";
+    const items = links
+      .map((link) => {
+        const label = escapeHtml(link.label || "");
+        const href = safeUrl(link.url);
+        if (!label || !href) return "";
+        return `<li><a href="${escapeHtml(
+          href
+        )}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+      })
+      .filter(Boolean)
+      .join("");
+    if (!items) return "";
+    return `<section>
+      <h2>${copy.links}</h2>
+      <ul class="link-map">${items}</ul>
+    </section>`;
+  };
+
   const renderHome = (data, root) => {
     const p = data.profile || {};
     const displayName =
@@ -196,6 +218,7 @@
         ${intro}
         <p>${copy.papersHint}</p>
       </section>
+      ${renderLinkMap(data.links)}
       <section>
         <h2>${copy.education}</h2>
         ${renderEducation(data.education || [])}
