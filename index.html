@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FUSE — Yutaro Fuse</title>
+    <meta
+      name="description"
+      content="Yutaro Fuse のポートフォリオ。デザインとエンジニアリングのあいだで、静かな体験をつくる。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">本文へスキップ</a>
+
+    <header class="site-header">
+      <a class="logo" href="#top" aria-label="FUSE ホーム">FUSE</a>
+      <nav class="nav" aria-label="メインナビ">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-label="ヒーロー">
+        <div class="hero__media" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80"
+            alt=""
+            width="2400"
+            height="1600"
+          />
+          <div class="hero__veil"></div>
+        </div>
+
+        <div class="hero__content">
+          <p class="brand reveal" data-reveal>FUSE</p>
+          <h1 class="reveal" data-reveal>
+            静けさのなかで、<br />確かな体験をつくる。
+          </h1>
+          <p class="lede reveal" data-reveal>
+            デザインとエンジニアリングを横断し、余白とリズムのあるデジタル空間を設計しています。
+          </p>
+          <div class="cta-group reveal" data-reveal>
+            <a class="cta cta--primary" href="#work">作品を見る</a>
+            <a class="cta cta--ghost" href="#contact">連絡する</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>About</p>
+          <h2 class="reveal" data-reveal>線を引き、余白を残す。</h2>
+          <p class="section__copy reveal" data-reveal>
+            情報を詰め込むのではなく、見る人の視線が自然に流れる構成を大切にしています。
+            ウェブ、プロダクト、ブランド——媒体を問わず、触れた瞬間に空気が変わる体験を目指しています。
+          </p>
+        </div>
+      </section>
+
+      <section class="section work" id="work">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>Selected Work</p>
+          <h2 class="reveal" data-reveal>最近の取り組み</h2>
+
+          <ul class="work-list">
+            <li class="work-item reveal" data-reveal>
+              <a href="#contact">
+                <span class="work-item__index">01</span>
+                <div class="work-item__body">
+                  <h3>Atelier Landing</h3>
+                  <p>ブランドの空気感を一枚の画面に凝縮したランディングページ。</p>
+                </div>
+                <span class="work-item__meta">Web / Brand</span>
+              </a>
+            </li>
+            <li class="work-item reveal" data-reveal>
+              <a href="#contact">
+                <span class="work-item__index">02</span>
+                <div class="work-item__body">
+                  <h3>Signal Dashboard</h3>
+                  <p>複雑なデータを静かなUIへ翻訳した運用画面の再設計。</p>
+                </div>
+                <span class="work-item__meta">Product</span>
+              </a>
+            </li>
+            <li class="work-item reveal" data-reveal>
+              <a href="#contact">
+                <span class="work-item__index">03</span>
+                <div class="work-item__body">
+                  <h3>Paper Archive</h3>
+                  <p>読みやすさを軸にしたアーカイブサイトとタイポグラフィ設計。</p>
+                </div>
+                <span class="work-item__meta">Editorial</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="section__inner">
+          <p class="eyebrow reveal" data-reveal>Contact</p>
+          <h2 class="reveal" data-reveal>一緒に、つくりましょう。</h2>
+          <p class="section__copy reveal" data-reveal>
+            新規サイト、リデザイン、プロトタイプのご相談など、お気軽にご連絡ください。
+          </p>
+          <a class="cta cta--primary reveal" data-reveal href="mailto:hello@fuse.studio"
+            >hello@fuse.studio</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> FUSE</p>
+      <p class="site-footer__note">Crafted with quiet intention.</p>
+    </footer>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
