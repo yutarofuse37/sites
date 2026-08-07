@@ -18,7 +18,9 @@
             }
           ],
           "note": "Preliminary version appeared in WAAC 2025.",
-          "note_ja": "Preliminary version appeared in WAAC 2025."
+          "note_ja": "Preliminary version appeared in WAAC 2025.",
+          "slide_url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
+          "slide_label": "Slides"
         }
       ]
     },
@@ -40,7 +42,9 @@
             }
           ],
           "note": "",
-          "note_ja": ""
+          "note_ja": "",
+          "slide_url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
+          "slide_label": "Slides"
         }
       ]
     },
@@ -57,7 +61,9 @@
           "venue_url": "https://la-symposium.github.io/2026/summer.html",
           "links": [],
           "note": "",
-          "note_ja": ""
+          "note_ja": "",
+          "slide_url": "https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc",
+          "slide_label": "Slides"
         },
         {
           "authors": "Yutaro Fuse, Nobutaka Shimizu, and Akiyoshi Shioura",
@@ -69,7 +75,28 @@
           "venue_url": "https://la-symposium.github.io/2025/winter.html",
           "links": [],
           "note": "",
-          "note_ja": ""
+          "note_ja": "",
+          "slide_url": "https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_",
+          "slide_label": "Slides"
+        }
+      ]
+    },
+    {
+      "title": "Seminar Notes / Other Talks",
+      "items": [
+        {
+          "authors": "",
+          "authors_ja": "",
+          "title": "輪講資料",
+          "title_ja": "輪講資料",
+          "venue": "経営工学・経済学輪講（最小カット / 辺連結度増加など）",
+          "venue_ja": "経営工学・経済学輪講（最小カット / 辺連結度増加など）",
+          "venue_url": "",
+          "links": [],
+          "note": "",
+          "note_ja": "",
+          "slide_url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
+          "slide_label": "Slides"
         }
       ]
     }

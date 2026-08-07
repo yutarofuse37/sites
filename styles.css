@@ -217,6 +217,15 @@ a.pub-venue {
   background: var(--red-dark);
 }
 
+.badge--slide {
+  background: #1f4b7a;
+}
+
+.badge--slide:hover,
+.badge--slide:focus-visible {
+  background: #16375a;
+}
+
 .lang-switch {
   display: inline-flex;
   gap: 0.35rem;
@@ -232,33 +241,6 @@ a.pub-venue {
 .lang-switch a.is-active {
   opacity: 1;
   text-decoration: underline;
-}
-
-.slides {
-  list-style: none;
-  margin: 1rem 0 0;
-  padding: 0;
-}
-
-.slides.pub-list {
-  list-style: decimal;
-  padding-left: 1.4rem;
-}
-
-.slides li {
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.slides a {
-  font-weight: 700;
-}
-
-.slides__meta {
-  display: block;
-  margin-top: 0.25rem;
-  color: var(--muted);
-  font-size: 0.95rem;
 }
 
 .site-footer {
