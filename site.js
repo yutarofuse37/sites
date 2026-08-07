@@ -199,6 +199,9 @@
     root.innerHTML = `<h1>${copy.slidesTitle}</h1><ol class="slides pub-list" reversed>${items}</ol>`;
   };
 
+  const papersUrl =
+    lang === "en" ? "../data/papers.json" : "./data/papers.json";
+
   // Wire language switcher hrefs if present
   document.querySelectorAll("[data-lang-link]").forEach((el) => {
     const target = el.getAttribute("data-lang-link");
@@ -218,18 +221,28 @@
 
   root.innerHTML = `<p class="meta">${copy.loading}</p>`;
 
-  fetch(dataUrl, { cache: "no-cache" })
-    .then((res) => {
+  const loadJson = (url) =>
+    fetch(url, { cache: "no-cache" }).then((res) => {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
-    })
-    .then((data) => {
-      if (page === "home") renderHome(data, root);
-      else if (page === "papers") renderPapers(data, root);
-      else if (page === "slides") renderSlides(data, root);
-    })
-    .catch((error) => {
-      console.error(error);
-      root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
     });
+
+  if (page === "papers") {
+    loadJson(papersUrl)
+      .then((data) => renderPapers(data, root))
+      .catch((error) => {
+        console.error(error);
+        root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
+      });
+  } else {
+    loadJson(dataUrl)
+      .then((data) => {
+        if (page === "home") renderHome(data, root);
+        else if (page === "slides") renderSlides(data, root);
+      })
+      .catch((error) => {
+        console.error(error);
+        root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
+      });
+  }
 })();

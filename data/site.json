@@ -55,69 +55,6 @@
       ]
     }
   ],
-  "paper_sections": [
-    {
-      "title": "Journal Papers (Peer-Reviewed)",
-      "items": [
-        {
-          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
-          "title": "An Efficient Algorithm for Computing Average Network Flow",
-          "venue": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
-          "venue_url": "https://doi.org/10.15807/jorsj.69.39",
-          "links": [
-            {
-              "label": "DOI",
-              "url": "https://doi.org/10.15807/jorsj.69.39"
-            }
-          ],
-          "note": "Preliminary version appeared in WAAC 2025."
-        }
-      ]
-    },
-    {
-      "title": "International Conferences (Peer-Reviewed)",
-      "items": [
-        {
-          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
-          "title": "An Efficient Algorithm for Computing Average Network Flow",
-          "venue": "The 25th Japan–Korea Joint Workshop on Algorithms and Computation (WAAC 2025), Hokkaido University, Sapporo, Japan, August 19–20, 2025.",
-          "venue_url": "https://waac-alg-comp.github.io/2025/",
-          "links": [
-            {
-              "label": "Conference",
-              "url": "https://waac-alg-comp.github.io/2025/"
-            },
-            {
-              "label": "Accepted Papers",
-              "url": "https://waac-alg-comp.github.io/2025/accepted.html"
-            }
-          ],
-          "note": ""
-        }
-      ]
-    },
-    {
-      "title": "Domestic Conferences / Workshops / Symposiums",
-      "items": [
-        {
-          "authors": "布施 祐大郎，清水 伸高",
-          "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
-          "venue": "2026年度 夏のLAシンポジウム，水戸市民会館，2026年7月27日–29日。",
-          "venue_url": "https://la-symposium.github.io/2026/summer.html",
-          "links": [],
-          "note": ""
-        },
-        {
-          "authors": "布施 祐大郎，清水 伸高，塩浦 昭義",
-          "title": "Average Network Flow 最大化問題に対する近似解法",
-          "venue": "2025年度 冬のLAシンポジウム，京都大学数理解析研究所，2026年1月26日–28日。",
-          "venue_url": "https://la-symposium.github.io/2025/winter.html",
-          "links": [],
-          "note": ""
-        }
-      ]
-    }
-  ],
   "slides": [
     {
       "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
