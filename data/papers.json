@@ -85,16 +85,16 @@
       "title": "Seminar Notes / Other Talks",
       "items": [
         {
-          "authors": "",
-          "authors_ja": "",
-          "title": "輪講資料",
-          "title_ja": "輪講資料",
-          "venue": "経営工学・経済学輪講（最小カット / 辺連結度増加など）",
-          "venue_ja": "経営工学・経済学輪講（最小カット / 辺連結度増加など）",
+          "authors": "Li, J., & Panigrahi, D. (2020). ",
+          "authors_ja": "Li, J., & Panigrahi, D. (2020). ",
+          "title": "Deterministic Min-cut in Poly-logarithmic Max-flows. 2020 IEEE 61st Annual Symposium on Foundations of Computer Science (FOCS), 85–92. ",
+          "title_ja": "Deterministic Min-cut in Poly-logarithmic Max-flows. 2020 IEEE 61st Annual Symposium on Foundations of Computer Science (FOCS), 85–92. ",
+          "venue": "Reading in Industrial Engineering and Economics F ",
+          "venue_ja": "経営工学・経済学輪講F2025",
           "venue_url": "",
           "links": [],
           "note": "",
-          "note_ja": "",
+          "note_ja": "“isolating cut” の導入とそれを用いた乱択で最小カットを求めるアルゴリズムの紹介．",
           "slide_url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
           "slide_label": "Slides"
         }
