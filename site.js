@@ -16,9 +16,9 @@
           loading: "Loading…",
           loadError: "Failed to load content. Please try again later.",
           about: "About",
-          advisors: "Advisors",
           education: "Education",
           experience: "Experience",
+          advisorLabel: "Advisor",
           papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
@@ -28,9 +28,9 @@
           loadError:
             "内容の読み込みに失敗しました。しばらくしてから再度お試しください。",
           about: "自己紹介",
-          advisors: "指導教員",
           education: "学歴",
           experience: "各種経歴",
+          advisorLabel: "指導教員",
           papersHint:
             '論文・発表は <a href="./papers.html">Papers/Talks</a> を参照してください。',
           papersTitle: "Papers / Talks",
@@ -67,6 +67,39 @@
             item.period
           )}</span><span>${escapeHtml(item.detail)}</span></li>`
       )
+      .join("")}</ul>`;
+  };
+
+  const renderAdvisorNames = (advisors) => {
+    if (!advisors || !advisors.length) return "";
+    const names = advisors
+      .map((person) => {
+        const name = escapeHtml(person.name || "");
+        if (!name) return "";
+        const href = safeUrl(person.url);
+        return href
+          ? `<a href="${escapeHtml(
+              href
+            )}" target="_blank" rel="noopener noreferrer">${name}</a>`
+          : name;
+      })
+      .filter(Boolean);
+    if (!names.length) return "";
+    const joiner = lang === "ja" ? "，" : ", ";
+    return `<div class="list__advisor">${copy.advisorLabel}: ${names.join(
+      joiner
+    )}</div>`;
+  };
+
+  const renderEducation = (items) => {
+    if (!items || !items.length) return "";
+    return `<ul class="list">${items
+      .map((item) => {
+        const advisorsHtml = renderAdvisorNames(item.advisors);
+        return `<li><span class="list__date">${escapeHtml(
+          item.period
+        )}</span><span>${escapeHtml(item.detail)}${advisorsHtml}</span></li>`;
+      })
       .join("")}</ul>`;
   };
 
@@ -129,39 +162,6 @@
     );
   };
 
-  const renderAffiliation = (profile) => {
-    const labUrl = safeUrl(profile.lab_url);
-    return linkifyLabName(
-      profile.affiliation || "",
-      profile.lab_name || "",
-      labUrl
-    );
-  };
-
-  const renderAdvisors = (advisors) => {
-    if (!advisors || !advisors.length) return "";
-    const items = advisors
-      .map((person) => {
-        const name = escapeHtml(person.name || "");
-        if (!name) return "";
-        const role = person.role ? `（${escapeHtml(person.role)}）` : "";
-        const href = safeUrl(person.url);
-        const nameHtml = href
-          ? `<a href="${escapeHtml(
-              href
-            )}" target="_blank" rel="noopener noreferrer">${name}</a>`
-          : name;
-        return `<li>${nameHtml}${role}</li>`;
-      })
-      .filter(Boolean)
-      .join("");
-    if (!items) return "";
-    return `<section>
-      <h2>${copy.advisors}</h2>
-      <ul class="list list--plain">${items}</ul>
-    </section>`;
-  };
-
   const renderHome = (data, root) => {
     const p = data.profile || {};
     const displayName =
@@ -188,10 +188,9 @@
 
     root.innerHTML = `
       <h1>${escapeHtml(displayName)}</h1>
-      <p class="meta">${renderAffiliation(p)}<br />${
+      <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
-      ${renderAdvisors(data.advisors)}
       <section>
         <h2>${copy.about}</h2>
         ${intro}
@@ -199,7 +198,7 @@
       </section>
       <section>
         <h2>${copy.education}</h2>
-        ${renderList(data.education || [])}
+        ${renderEducation(data.education || [])}
       </section>
       <section>
         <h2>${copy.experience}</h2>
