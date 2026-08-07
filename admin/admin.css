@@ -166,6 +166,14 @@ h3 {
   color: var(--muted);
 }
 
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 .toolbar__right {
   display: flex;
   flex-wrap: wrap;
