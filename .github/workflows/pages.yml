@@ -24,7 +24,7 @@ jobs:
       - name: Prepare site files
         run: |
           mkdir _site
-          cp index.html papers.html slides.html styles.css main.js favicon.svg .nojekyll _site/
+          cp index.html papers.html slides.html styles.css main.js config.js papers.js favicon.svg .nojekyll _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -12,6 +12,19 @@
 - `papers.html` — Papers/Talks
 - `slides.html` — Slides
 
+## researchmap 連携
+
+`config.js` の `researchmapPermalink` に researchmap の ID を入れると、
+Papers/Talks を API から自動取得します。
+
+```js
+window.SITE_CONFIG = {
+  researchmapPermalink: "your-id", // https://researchmap.jp/your-id
+};
+```
+
+未設定時は `papers.html` の手書き一覧を表示します。
+
 ## ローカルで確認
 
 ```bash
