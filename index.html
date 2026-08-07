@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body data-page="home">
     <header class="site-header">
       <div class="site-header__inner">
         <a class="logo" href="./index.html">Yutaro Fuse</a>
@@ -29,106 +29,12 @@
       </div>
     </header>
 
-    <main class="page">
-      <h1>布施 祐大郎（ふせ ゆうたろう）</h1>
-      <p class="meta">
-        東京科学大学 工学院 経営工学系 塩浦研究室 修士課程<br />
-        e-mail:
-        <a href="mailto:fuse.y.6680@m.isct.ac.jp">fuse.y.6680 [at] m.isct.ac.jp</a>
-      </p>
-
-      <section>
-        <h2>自己紹介</h2>
-        <p>
-          東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎です。
-          離散最適化，オペレーションズ・リサーチ，特にネットワークフローに関連するものを研究しています。
-        </p>
-        <p>
-          論文・発表は
-          <a href="./papers.html">Papers/Talks</a>
-          ，スライドは
-          <a href="./slides.html">Slides</a>
-          を参照してください。
-        </p>
-      </section>
-
-      <section>
-        <h2>学歴</h2>
-        <ul class="list">
-          <li>
-            <span class="list__date">2025年4月 — 現在</span>
-            <span
-              >東京科学大学 工学院 経営工学系 経営工学コース 修士課程</span
-            >
-          </li>
-          <li>
-            <span class="list__date">2021年4月 — 2025年3月</span>
-            <span
-              >東京科学大学（東京工業大学）工学院 経営工学系 卒業</span
-            >
-          </li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>各種経歴</h2>
-
-        <h3>リサーチ・アシスタント（RA）</h3>
-        <ul class="list">
-          <li>
-            <span class="list__date">2025年10月 — 現在</span>
-            <span
-              >JST ERATO 小島マーケットデザインプロジェクト
-              離散数学グループ</span
-            >
-          </li>
-        </ul>
-
-        <h3>ティーチング・アシスタント（TA）</h3>
-        <ul class="list">
-          <li>
-            <span class="list__date">2025年12月</span>
-            <span
-              >R7年度 オペレーションズ・リサーチ 基礎（東京科学大学 工学院
-              経営工学系），担当教員：塩浦 昭義 教授</span
-            >
-          </li>
-          <li>
-            <span class="list__date">2025年12月</span>
-            <span
-              >R7年度 先端経営工学（東京科学大学 工学院
-              経営工学系），担当教員：塩浦 昭義 教授</span
-            >
-          </li>
-          <li>
-            <span class="list__date">2025年10月</span>
-            <span
-              >R7年度 プログラミング応用（東京科学大学 工学院
-              経営工学系），担当教員：清水 伸高 助教</span
-            >
-          </li>
-          <li>
-            <span class="list__date">2025年10月</span>
-            <span
-              >R7年度 離散最適化の理論と応用（東京科学大学 工学院 経営工学系
-              経営工学コース），担当教員：塩浦 昭義 教授</span
-            >
-          </li>
-          <li>
-            <span class="list__date">2025年6月</span>
-            <span
-              >R7年度 経営・経済数学（東京科学大学 工学院
-              経営工学系），担当教員：塩浦 昭義 教授</span
-            >
-          </li>
-        </ul>
-      </section>
-    </main>
+    <main class="page" id="content"></main>
 
     <footer class="site-footer">
       <p>© <span id="year"></span> Yutaro Fuse</p>
     </footer>
 
-    <script src="./main.js"></script>
+    <script src="./site.js"></script>
   </body>
 </html>

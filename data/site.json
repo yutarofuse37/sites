@@ -1,0 +1,121 @@
+{
+  "profile": {
+    "name_ja": "布施 祐大郎（ふせ ゆうたろう）",
+    "name_en": "Yutaro Fuse",
+    "affiliation": "東京科学大学 工学院 経営工学系 塩浦研究室 修士課程",
+    "email": "fuse.y.6680 [at] m.isct.ac.jp",
+    "description": "東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎。離散最適化・オペレーションズ・リサーチ・ネットワークフローを研究しています。",
+    "intro": [
+      "東京科学大学 工学院 経営工学系 塩浦研究室の布施祐大郎です。離散最適化，オペレーションズ・リサーチ，特にネットワークフローに関連するものを研究しています。"
+    ]
+  },
+  "education": [
+    {
+      "period": "2025年4月 — 現在",
+      "detail": "東京科学大学 工学院 経営工学系 経営工学コース 修士課程"
+    },
+    {
+      "period": "2021年4月 — 2025年3月",
+      "detail": "東京科学大学（東京工業大学）工学院 経営工学系 卒業"
+    }
+  ],
+  "experience": [
+    {
+      "title": "リサーチ・アシスタント（RA）",
+      "items": [
+        {
+          "period": "2025年10月 — 現在",
+          "detail": "JST ERATO 小島マーケットデザインプロジェクト 離散数学グループ"
+        }
+      ]
+    },
+    {
+      "title": "ティーチング・アシスタント（TA）",
+      "items": [
+        {
+          "period": "2025年12月",
+          "detail": "R7年度 オペレーションズ・リサーチ 基礎（東京科学大学 工学院 経営工学系），担当教員：塩浦 昭義 教授"
+        },
+        {
+          "period": "2025年12月",
+          "detail": "R7年度 先端経営工学（東京科学大学 工学院 経営工学系），担当教員：塩浦 昭義 教授"
+        },
+        {
+          "period": "2025年10月",
+          "detail": "R7年度 プログラミング応用（東京科学大学 工学院 経営工学系），担当教員：清水 伸高 助教"
+        },
+        {
+          "period": "2025年10月",
+          "detail": "R7年度 離散最適化の理論と応用（東京科学大学 工学院 経営工学系 経営工学コース），担当教員：塩浦 昭義 教授"
+        },
+        {
+          "period": "2025年6月",
+          "detail": "R7年度 経営・経済数学（東京科学大学 工学院 経営工学系），担当教員：塩浦 昭義 教授"
+        }
+      ]
+    }
+  ],
+  "paper_sections": [
+    {
+      "title": "Journal Paper (Peer-Reviewed)",
+      "items": [
+        {
+          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu and Akiyoshi Shioura.",
+          "title": "An Efficient Algorithm for Computing Average Network Flow",
+          "venue": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
+          "note": "Preliminary version appeared in WAAC 2025."
+        }
+      ]
+    },
+    {
+      "title": "International Conferences (Peer-Reviewed)",
+      "items": [
+        {
+          "authors": "",
+          "title": "An Efficient Algorithm for Computing Average Network Flow",
+          "venue": "The 25th Japan–Korea Joint Workshop on Algorithms and Computation (WAAC 2025), Hokkaido University, Sapporo, Japan, August 19–20, 2025.",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "title": "Domestic Conferences / Workshops / Symposiums",
+      "items": [
+        {
+          "authors": "布施 祐大郎，清水 伸高",
+          "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
+          "venue": "2026年度 夏のLAシンポジウム，水戸市民会館，2026年7月27日–29日。",
+          "note": ""
+        },
+        {
+          "authors": "布施 祐大郎，清水 伸高，塩浦 昭義",
+          "title": "Average Network Flow 最大化問題に対する近似解法",
+          "venue": "2025年度 冬のLAシンポジウム，京都大学数理解析研究所，2026年1月26日–28日。",
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
+      "url": "https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc",
+      "meta": "夏のLAシンポジウム2026 / 布施 祐大郎，清水 伸高"
+    },
+    {
+      "title": "Average Network Flow 最大化問題に対する近似解法",
+      "url": "https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_",
+      "meta": "冬のLAシンポジウム2025 / 布施 祐大郎，清水 伸高，塩浦 昭義"
+    },
+    {
+      "title": "An Efficient Algorithm for Computing Average Network Flow",
+      "url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
+      "meta": "WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, Akiyoshi Shioura"
+    },
+    {
+      "title": "輪講資料",
+      "url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
+      "meta": "経営工学・経済学輪講（最小カット / 辺連結度増加など）"
+    }
+  ]
+}
