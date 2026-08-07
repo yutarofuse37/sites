@@ -17,7 +17,6 @@
   const panels = {
     profile: document.getElementById("panel-profile"),
     education: document.getElementById("panel-education"),
-    advisors: document.getElementById("panel-advisors"),
     experience: document.getElementById("panel-experience"),
     papers: document.getElementById("panel-papers"),
   };
@@ -138,7 +137,7 @@
       ${field("氏名（日本語）", "name_ja", p.name_ja || "")}
       ${field("氏名（英語）", "name_en", p.name_en || "")}
       ${field("所属", "affiliation", p.affiliation || "")}
-      ${field("研究室名（所属・紹介文中でリンク化）", "lab_name", p.lab_name || "")}
+      ${field("研究室名（自己紹介文中でリンク化）", "lab_name", p.lab_name || "")}
       ${field("研究室 URL", "lab_url", p.lab_url || "")}
       ${field("メール（表示用・リンクなし）", "email", p.email || "")}
       ${field("サイト説明（SEO）", "description", p.description || "", true)}
@@ -146,49 +145,30 @@
     `;
   };
 
-  const renderAdvisors = () => {
-    const items = data.advisors || [];
-    panels.advisors.innerHTML = `
-      <h2>指導教員</h2>
-      <p class="status">氏名にホームページ URL を付けるとリンクになります。</p>
-      <div id="advisors-list"></div>
-      <button type="button" class="btn btn--small" data-add="advisor">＋ 追加</button>
-    `;
-    const list = panels.advisors.querySelector("#advisors-list");
-    list.innerHTML = items
-      .map(
-        (item, index) => `
-      <div class="item-card" data-index="${index}">
-        ${field("氏名", "name", item.name || "")}
-        ${field("役職（教授・助教など）", "role", item.role || "")}
-        ${field("ホームページ URL", "url", item.url || "")}
-        <div class="row-actions">
-          <button type="button" class="btn btn--small btn--danger" data-remove="advisor" data-index="${index}">削除</button>
-        </div>
-      </div>`
-      )
-      .join("");
-  };
-
   const renderEducation = () => {
     const items = data.education || [];
     panels.education.innerHTML = `
       <h2>学歴</h2>
+      <p class="status">指導教員は「氏名|URL」を1行ずつ（清水先生のページと同じく、学歴の下に「指導教員: …」と出ます）。</p>
       <div id="education-list"></div>
       <button type="button" class="btn btn--small" data-add="education">＋ 追加</button>
     `;
     const list = panels.education.querySelector("#education-list");
     list.innerHTML = items
-      .map(
-        (item, index) => `
+      .map((item, index) => {
+        const advisorsText = (item.advisors || [])
+          .map((person) => `${person.name || ""}|${person.url || ""}`)
+          .join("\n");
+        return `
       <div class="item-card" data-index="${index}">
         ${field("期間", "period", item.period || "")}
         ${field("内容", "detail", item.detail || "", true)}
+        ${field("指導教員（氏名|URL）", "advisors", advisorsText, true)}
         <div class="row-actions">
           <button type="button" class="btn btn--small btn--danger" data-remove="education" data-index="${index}">削除</button>
         </div>
-      </div>`
-      )
+      </div>`;
+      })
       .join("");
   };
 
@@ -280,7 +260,6 @@
 
   const renderAll = () => {
     renderProfile();
-    renderAdvisors();
     renderEducation();
     renderExperience();
     renderPapers();
@@ -304,7 +283,23 @@
     const education = [...panels.education.querySelectorAll(".item-card")].map(
       (card) => {
         const f = readFields(card);
-        return { period: f.period || "", detail: f.detail || "" };
+        const advisors = String(f.advisors || "")
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => {
+            const [name, ...rest] = line.split("|");
+            return {
+              name: (name || "").trim(),
+              url: rest.join("|").trim(),
+            };
+          })
+          .filter((person) => person.name);
+        return {
+          period: f.period || "",
+          detail: f.detail || "",
+          advisors,
+        };
       }
     );
 
@@ -323,17 +318,6 @@
         experience.push({ title, items });
       });
 
-    const advisors = [
-      ...panels.advisors.querySelectorAll("#advisors-list > .item-card"),
-    ].map((card) => {
-      const f = readFields(card);
-      return {
-        name: f.name || "",
-        role: f.role || "",
-        url: f.url || "",
-      };
-    });
-
     return {
       profile: {
         name_ja: profileFields.name_ja || "",
@@ -345,7 +329,6 @@
         description: profileFields.description || "",
         intro,
       },
-      advisors,
       education,
       experience,
     };
@@ -414,7 +397,6 @@
     data = JSON.parse(decodeGithubFile(siteFile));
     papersData = JSON.parse(decodeGithubFile(papersFile));
     if (!papersData.paper_sections) papersData.paper_sections = [];
-    if (!data.advisors) data.advisors = [];
     renderAll();
     setStatus(
       activeTab === "papers"
@@ -516,25 +498,13 @@
 
     if (btn.dataset.add === "education") {
       data = collectSiteData();
-      data.education.push({ period: "", detail: "" });
+      data.education.push({ period: "", detail: "", advisors: [] });
       renderEducation();
     }
     if (btn.dataset.remove === "education") {
       data = collectSiteData();
       data.education.splice(Number(btn.dataset.index), 1);
       renderEducation();
-    }
-    if (btn.dataset.add === "advisor") {
-      data = collectSiteData();
-      data.advisors = data.advisors || [];
-      data.advisors.push({ name: "", role: "", url: "" });
-      renderAdvisors();
-    }
-    if (btn.dataset.remove === "advisor") {
-      data = collectSiteData();
-      data.advisors = data.advisors || [];
-      data.advisors.splice(Number(btn.dataset.index), 1);
-      renderAdvisors();
     }
     if (btn.dataset.add === "experience-group") {
       data = collectSiteData();
@@ -645,9 +615,7 @@
       );
       siteSha = siteFile.sha;
       data = JSON.parse(decodeGithubFile(siteFile));
-      if (!data.advisors) data.advisors = [];
       renderProfile();
-      renderAdvisors();
       renderEducation();
       renderExperience();
       setStatus(

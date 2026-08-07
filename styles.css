@@ -144,6 +144,12 @@ section p {
   font-weight: 500;
 }
 
+.list__advisor {
+  margin-top: 0.2rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
 .pub {
   margin: 0 0 1.1rem;
   padding-bottom: 1rem;
@@ -241,22 +247,6 @@ a.pub-venue {
 .lang-switch a.is-active {
   opacity: 1;
   text-decoration: underline;
-}
-
-.list--plain {
-  list-style: none;
-  padding-left: 0;
-}
-
-.list--plain li {
-  display: block;
-  padding: 0.35rem 0;
-  border-bottom: none;
-  grid-template-columns: none;
-}
-
-.list--plain li + li {
-  margin-top: 0.25rem;
 }
 
 .site-footer {
