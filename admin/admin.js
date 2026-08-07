@@ -23,12 +23,41 @@
   };
 
   let token = localStorage.getItem(TOKEN_KEY) || "";
-  let fileSha = "";
+  let siteSha = "";
+  let papersSha = "";
   let data = null;
+  let papersData = { paper_sections: [] };
   let editLang = "ja";
+  let activeTab = "profile";
 
-  const filePath = () =>
+  const siteFilePath = () =>
     editLang === "en" ? "data/site.en.json" : "data/site.json";
+  const papersFilePath = "data/papers.json";
+
+  const decodeGithubFile = (file) =>
+    decodeURIComponent(
+      Array.prototype.map
+        .call(atob(file.content.replace(/\n/g, "")), (c) =>
+          "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)
+        )
+        .join("")
+    );
+
+  const putGithubFile = async (path, sha, payload, message) => {
+    const json = JSON.stringify(payload, null, 2) + "\n";
+    const content = btoa(unescape(encodeURIComponent(json)));
+    const result = await api(`/repos/${REPO}/contents/${path}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message,
+        content,
+        sha,
+        branch: BRANCH,
+      }),
+    });
+    return result.content.sha;
+  };
 
   const api = async (path, options = {}) => {
     const res = await fetch(`https://api.github.com${path}`, {
@@ -174,10 +203,10 @@
   };
 
   const renderPapers = () => {
-    const sections = data.paper_sections || [];
+    const sections = papersData.paper_sections || [];
     panels.papers.innerHTML = `
-      <h2>Papers / Talks</h2>
-      <p class="status">会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
+      <h2>Papers / Talks（日英共通）</h2>
+      <p class="status">ここは日本語・英語で同じ内容を使います。1回保存すれば両方の Papers/Talks に反映されます。会場URLを入れると会場名がリンクになります。追加リンクは「表示名|URL」を1行ずつ。</p>
       <div id="papers-list"></div>
       <button type="button" class="btn btn--small" data-add="paper-section">＋ セクション追加</button>
     `;
@@ -256,9 +285,8 @@
     return result;
   };
 
-  const collectData = () => {
-    const profileRoot = panels.profile;
-    const profileFields = readFields(profileRoot);
+  const collectSiteData = () => {
+    const profileFields = readFields(panels.profile);
     const intro = profileFields.intro
       .split(/\n\s*\n/)
       .map((part) => part.trim())
@@ -272,52 +300,30 @@
     );
 
     const experience = [];
-    panels.experience.querySelectorAll(":scope > #experience-list > .item-card").forEach((groupCard) => {
-      const title = groupCard.querySelector('[data-name="title"]')?.value || "";
-      const items = [...groupCard.querySelectorAll(".item-card")].map((card) => {
-        const f = readFields(card);
-        return { period: f.period || "", detail: f.detail || "" };
+    panels.experience
+      .querySelectorAll(":scope > #experience-list > .item-card")
+      .forEach((groupCard) => {
+        const title =
+          groupCard.querySelector('[data-name="title"]')?.value || "";
+        const items = [...groupCard.querySelectorAll(".item-card")].map(
+          (card) => {
+            const f = readFields(card);
+            return { period: f.period || "", detail: f.detail || "" };
+          }
+        );
+        experience.push({ title, items });
       });
-      experience.push({ title, items });
-    });
 
-    const paper_sections = [];
-    panels.papers.querySelectorAll(":scope > #papers-list > .item-card").forEach((sectionCard) => {
-      const title = sectionCard.querySelector('[data-name="title"]')?.value || "";
-      const items = [...sectionCard.querySelectorAll(".item-card")].map((card) => {
+    const slides = [...panels.slides.querySelectorAll(".item-card")].map(
+      (card) => {
         const f = readFields(card);
-        const links = String(f.links || "")
-          .split("\n")
-          .map((line) => line.trim())
-          .filter(Boolean)
-          .map((line) => {
-            const [label, ...rest] = line.split("|");
-            return {
-              label: (label || "").trim(),
-              url: rest.join("|").trim(),
-            };
-          })
-          .filter((link) => link.label && link.url);
         return {
-          authors: f.authors || "",
           title: f.title || "",
-          venue: f.venue || "",
-          venue_url: f.venue_url || "",
-          links,
-          note: f.note || "",
+          url: f.url || "",
+          meta: f.meta || "",
         };
-      });
-      paper_sections.push({ title, items });
-    });
-
-    const slides = [...panels.slides.querySelectorAll(".item-card")].map((card) => {
-      const f = readFields(card);
-      return {
-        title: f.title || "",
-        url: f.url || "",
-        meta: f.meta || "",
-      };
-    });
+      }
+    );
 
     return {
       profile: {
@@ -330,50 +336,99 @@
       },
       education,
       experience,
-      paper_sections,
       slides,
     };
   };
 
+  const collectPapersData = () => {
+    const paper_sections = [];
+    panels.papers
+      .querySelectorAll(":scope > #papers-list > .item-card")
+      .forEach((sectionCard) => {
+        const title =
+          sectionCard.querySelector('[data-name="title"]')?.value || "";
+        const items = [...sectionCard.querySelectorAll(".item-card")].map(
+          (card) => {
+            const f = readFields(card);
+            const links = String(f.links || "")
+              .split("\n")
+              .map((line) => line.trim())
+              .filter(Boolean)
+              .map((line) => {
+                const [label, ...rest] = line.split("|");
+                return {
+                  label: (label || "").trim(),
+                  url: rest.join("|").trim(),
+                };
+              })
+              .filter((link) => link.label && link.url);
+            return {
+              authors: f.authors || "",
+              title: f.title || "",
+              venue: f.venue || "",
+              venue_url: f.venue_url || "",
+              links,
+              note: f.note || "",
+            };
+          }
+        );
+        paper_sections.push({ title, items });
+      });
+    return { paper_sections };
+  };
+
   const loadContent = async () => {
-    setStatus(`GitHub から読み込み中…（${filePath()}）`);
-    const file = await api(
-      `/repos/${REPO}/contents/${filePath()}?ref=${encodeURIComponent(BRANCH)}`
-    );
-    fileSha = file.sha;
-    const decoded = decodeURIComponent(
-      Array.prototype.map
-        .call(atob(file.content.replace(/\n/g, "")), (c) =>
-          "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)
-        )
-        .join("")
-    );
-    data = JSON.parse(decoded);
+    setStatus("GitHub から読み込み中…");
+    const [siteFile, papersFile] = await Promise.all([
+      api(
+        `/repos/${REPO}/contents/${siteFilePath()}?ref=${encodeURIComponent(
+          BRANCH
+        )}`
+      ),
+      api(
+        `/repos/${REPO}/contents/${papersFilePath}?ref=${encodeURIComponent(
+          BRANCH
+        )}`
+      ),
+    ]);
+    siteSha = siteFile.sha;
+    papersSha = papersFile.sha;
+    data = JSON.parse(decodeGithubFile(siteFile));
+    papersData = JSON.parse(decodeGithubFile(papersFile));
+    if (!papersData.paper_sections) papersData.paper_sections = [];
     renderAll();
     setStatus(
-      `編集中: ${filePath()} 。保存するとサイトに反映されます。`
+      activeTab === "papers"
+        ? `編集中: ${papersFilePath}（日英共通）。保存で両方の Papers/Talks に反映されます。`
+        : `編集中: ${siteFilePath()} 。Papers/Talks は共通データです。`
     );
   };
 
   const saveContent = async () => {
-    data = collectData();
-    const json = JSON.stringify(data, null, 2) + "\n";
-    const content = btoa(unescape(encodeURIComponent(json)));
     setStatus("保存中…");
     saveBtn.disabled = true;
     try {
-      const result = await api(`/repos/${REPO}/contents/${filePath()}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: `Update ${filePath()} via admin UI`,
-          content,
-          sha: fileSha,
-          branch: BRANCH,
-        }),
-      });
-      fileSha = result.content.sha;
-      setStatus("保存しました。数分後にサイトへ反映されます。");
+      if (activeTab === "papers") {
+        papersData = collectPapersData();
+        papersSha = await putGithubFile(
+          papersFilePath,
+          papersSha,
+          papersData,
+          `Update ${papersFilePath} via admin UI`
+        );
+        setStatus(
+          "Papers/Talks を保存しました（日英共通）。数分後に両方へ反映されます。"
+        );
+      } else {
+        data = collectSiteData();
+        siteSha = await putGithubFile(
+          siteFilePath(),
+          siteSha,
+          data,
+          `Update ${siteFilePath()} via admin UI`
+        );
+        setStatus(`保存しました（${siteFilePath()}）。数分後にサイトへ反映されます。`);
+      }
     } catch (error) {
       setStatus(`保存に失敗しました: ${error.message}`, true);
     } finally {
@@ -407,21 +462,32 @@
 
   const logout = () => {
     token = "";
-    fileSha = "";
+    siteSha = "";
+    papersSha = "";
     data = null;
+    papersData = { paper_sections: [] };
     localStorage.removeItem(TOKEN_KEY);
     tokenInput.value = "";
     showLogin();
   };
 
-  document.querySelectorAll(".tab").forEach((tab) => {
+  document.querySelectorAll(".tabs .tab").forEach((tab) => {
     tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach((t) => t.classList.remove("is-active"));
+      document.querySelectorAll(".tabs .tab").forEach((t) =>
+        t.classList.remove("is-active")
+      );
       tab.classList.add("is-active");
-      const name = tab.dataset.tab;
+      activeTab = tab.dataset.tab;
       Object.entries(panels).forEach(([key, panel]) => {
-        panel.hidden = key !== name;
+        panel.hidden = key !== activeTab;
       });
+      if (activeTab === "papers") {
+        setStatus(
+          `編集中: ${papersFilePath}（日英共通）。保存で両方の Papers/Talks に反映されます。`
+        );
+      } else {
+        setStatus(`編集中: ${siteFilePath()} 。Papers/Talks は共通データです。`);
+      }
     });
   });
 
@@ -430,51 +496,66 @@
     if (!btn || !data) return;
 
     if (btn.dataset.add === "education") {
-      data = collectData();
+      data = collectSiteData();
       data.education.push({ period: "", detail: "" });
       renderEducation();
     }
     if (btn.dataset.remove === "education") {
-      data = collectData();
+      data = collectSiteData();
       data.education.splice(Number(btn.dataset.index), 1);
       renderEducation();
     }
     if (btn.dataset.add === "experience-group") {
-      data = collectData();
+      data = collectSiteData();
       data.experience.push({ title: "", items: [{ period: "", detail: "" }] });
       renderExperience();
     }
     if (btn.dataset.remove === "experience-group") {
-      data = collectData();
+      data = collectSiteData();
       data.experience.splice(Number(btn.dataset.g), 1);
       renderExperience();
     }
     if (btn.dataset.add === "experience-item") {
-      data = collectData();
-      data.experience[Number(btn.dataset.g)].items.push({ period: "", detail: "" });
+      data = collectSiteData();
+      data.experience[Number(btn.dataset.g)].items.push({
+        period: "",
+        detail: "",
+      });
       renderExperience();
     }
     if (btn.dataset.remove === "experience-item") {
-      data = collectData();
-      data.experience[Number(btn.dataset.g)].items.splice(Number(btn.dataset.i), 1);
+      data = collectSiteData();
+      data.experience[Number(btn.dataset.g)].items.splice(
+        Number(btn.dataset.i),
+        1
+      );
       renderExperience();
     }
     if (btn.dataset.add === "paper-section") {
-      data = collectData();
-      data.paper_sections.push({
+      papersData = collectPapersData();
+      papersData.paper_sections.push({
         title: "",
-        items: [{ authors: "", title: "", venue: "", venue_url: "", links: [], note: "" }],
+        items: [
+          {
+            authors: "",
+            title: "",
+            venue: "",
+            venue_url: "",
+            links: [],
+            note: "",
+          },
+        ],
       });
       renderPapers();
     }
     if (btn.dataset.remove === "paper-section") {
-      data = collectData();
-      data.paper_sections.splice(Number(btn.dataset.s), 1);
+      papersData = collectPapersData();
+      papersData.paper_sections.splice(Number(btn.dataset.s), 1);
       renderPapers();
     }
     if (btn.dataset.add === "paper-item") {
-      data = collectData();
-      data.paper_sections[Number(btn.dataset.s)].items.push({
+      papersData = collectPapersData();
+      papersData.paper_sections[Number(btn.dataset.s)].items.push({
         authors: "",
         title: "",
         venue: "",
@@ -485,17 +566,20 @@
       renderPapers();
     }
     if (btn.dataset.remove === "paper-item") {
-      data = collectData();
-      data.paper_sections[Number(btn.dataset.s)].items.splice(Number(btn.dataset.i), 1);
+      papersData = collectPapersData();
+      papersData.paper_sections[Number(btn.dataset.s)].items.splice(
+        Number(btn.dataset.i),
+        1
+      );
       renderPapers();
     }
     if (btn.dataset.add === "slide") {
-      data = collectData();
+      data = collectSiteData();
       data.slides.push({ title: "", url: "", meta: "" });
       renderSlides();
     }
     if (btn.dataset.remove === "slide") {
-      data = collectData();
+      data = collectSiteData();
       data.slides.splice(Number(btn.dataset.index), 1);
       renderSlides();
     }
@@ -510,11 +594,33 @@
 
   const switchEditLang = async (nextLang) => {
     if (nextLang === editLang) return;
+    if (activeTab !== "papers") {
+      data = collectSiteData();
+    } else {
+      papersData = collectPapersData();
+    }
     editLang = nextLang;
     langJaBtn.classList.toggle("is-active", editLang === "ja");
     langEnBtn.classList.toggle("is-active", editLang === "en");
     try {
-      await loadContent();
+      // Reload only the language-specific site file; keep shared papers as edited in memory
+      setStatus("GitHub から読み込み中…");
+      const siteFile = await api(
+        `/repos/${REPO}/contents/${siteFilePath()}?ref=${encodeURIComponent(
+          BRANCH
+        )}`
+      );
+      siteSha = siteFile.sha;
+      data = JSON.parse(decodeGithubFile(siteFile));
+      renderProfile();
+      renderEducation();
+      renderExperience();
+      renderSlides();
+      setStatus(
+        activeTab === "papers"
+          ? `編集中: ${papersFilePath}（日英共通）。保存で両方の Papers/Talks に反映されます。`
+          : `編集中: ${siteFilePath()} 。Papers/Talks は共通データです。`
+      );
     } catch (error) {
       setStatus(`読み込みに失敗しました: ${error.message}`, true);
     }

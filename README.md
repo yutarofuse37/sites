@@ -15,7 +15,8 @@
 3. トークンを貼ってログイン
 4. 日本語 / English を切り替えて編集し、「GitHub に保存」
 
-Papers/Talks では会場・会議 HP の URL と、DOI などの追加リンク（`表示名|URL`）を設定できます。
+Papers/Talks は `data/papers.json` に日英共通で保存されます。1回の編集で両方に反映されます。
+会場・会議 HP の URL と、DOI などの追加リンク（`表示名|URL`）もここで設定できます。
 
 ## ページ
 
@@ -23,7 +24,8 @@ Papers/Talks では会場・会議 HP の URL と、DOI などの追加リンク
 - `papers.html` / `en/papers.html` — Papers/Talks
 - `slides.html` / `en/slides.html` — Slides
 - `admin/` — 編集画面
-- `data/site.json` / `data/site.en.json` — コンテンツ
+- `data/site.json` / `data/site.en.json` — プロフィール・学歴・経歴・スライド
+- `data/papers.json` — Papers/Talks（日英共通）
 
 ## ローカルで確認
 
