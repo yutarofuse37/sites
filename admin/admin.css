@@ -166,13 +166,18 @@ h3 {
   color: var(--muted);
 }
 
-.toolbar {
+.toolbar__right {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
   align-items: center;
-  margin-bottom: 1rem;
 }
+
+.lang-edit {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
 
 .tabs {
   display: flex;

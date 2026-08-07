@@ -57,12 +57,19 @@
   ],
   "paper_sections": [
     {
-      "title": "Journal Paper (Peer-Reviewed)",
+      "title": "Journal Papers (Peer-Reviewed)",
       "items": [
         {
-          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu and Akiyoshi Shioura.",
+          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
           "title": "An Efficient Algorithm for Computing Average Network Flow",
           "venue": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
+          "venue_url": "https://doi.org/10.15807/jorsj.69.39",
+          "links": [
+            {
+              "label": "DOI",
+              "url": "https://doi.org/10.15807/jorsj.69.39"
+            }
+          ],
           "note": "Preliminary version appeared in WAAC 2025."
         }
       ]
@@ -71,9 +78,20 @@
       "title": "International Conferences (Peer-Reviewed)",
       "items": [
         {
-          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu and Akiyoshi Shioura.",
+          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
           "title": "An Efficient Algorithm for Computing Average Network Flow",
           "venue": "The 25th Japan–Korea Joint Workshop on Algorithms and Computation (WAAC 2025), Hokkaido University, Sapporo, Japan, August 19–20, 2025.",
+          "venue_url": "https://waac-alg-comp.github.io/2025/",
+          "links": [
+            {
+              "label": "Conference",
+              "url": "https://waac-alg-comp.github.io/2025/"
+            },
+            {
+              "label": "Accepted Papers",
+              "url": "https://waac-alg-comp.github.io/2025/accepted.html"
+            }
+          ],
           "note": ""
         }
       ]
@@ -85,12 +103,16 @@
           "authors": "布施 祐大郎，清水 伸高",
           "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
           "venue": "2026年度 夏のLAシンポジウム，水戸市民会館，2026年7月27日–29日。",
+          "venue_url": "",
+          "links": [],
           "note": ""
         },
         {
           "authors": "布施 祐大郎，清水 伸高，塩浦 昭義",
           "title": "Average Network Flow 最大化問題に対する近似解法",
           "venue": "2025年度 冬のLAシンポジウム，京都大学数理解析研究所，2026年1月26日–28日。",
+          "venue_url": "",
+          "links": [],
           "note": ""
         }
       ]
@@ -115,7 +137,7 @@
     {
       "title": "輪講資料",
       "url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
-      "meta": "Li, J., & Panigrahi, D. (2020). Deterministic Min-cut in Poly-logarithmic Max-flows. 2020 IEEE 61st Annual Symposium on Foundations of Computer Science (FOCS), 85–92.  2025年度経営工学・経済学輪講S, 2025年6月4日."
+      "meta": "経営工学・経済学輪講（最小カット / 辺連結度増加など）"
     }
   ]
 }

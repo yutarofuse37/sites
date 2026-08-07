@@ -1,0 +1,143 @@
+{
+  "profile": {
+    "name_ja": "Yutaro Fuse",
+    "name_en": "Yutaro Fuse",
+    "affiliation": "Master's student, Shioura Laboratory, Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo",
+    "email": "fuse.y.6680 [at] m.isct.ac.jp",
+    "description": "Yutaro Fuse, Shioura Laboratory, Institute of Science Tokyo. Research interests: discrete optimization, operations research, and network flows.",
+    "intro": [
+      "I am a master's student at the Shioura Laboratory, Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo. My research interests include discrete optimization, operations research, and especially network flows."
+    ]
+  },
+  "education": [
+    {
+      "period": "Apr 2025 — Present",
+      "detail": "M.S. Program, Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo"
+    },
+    {
+      "period": "Apr 2021 — Mar 2025",
+      "detail": "B.S., Department of Industrial Engineering and Economics, School of Engineering, Institute of Science Tokyo (Tokyo Institute of Technology)"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Research Assistant (RA)",
+      "items": [
+        {
+          "period": "Oct 2025 — Present",
+          "detail": "JST ERATO Kojima Market Design Project, Discrete Mathematics Group"
+        }
+      ]
+    },
+    {
+      "title": "Teaching Assistant (TA)",
+      "items": [
+        {
+          "period": "Dec 2025",
+          "detail": "Fundamentals of Operations Research (Institute of Science Tokyo), Instructor: Prof. Akiyoshi Shioura"
+        },
+        {
+          "period": "Dec 2025",
+          "detail": "Advanced Industrial Engineering and Economics (Institute of Science Tokyo), Instructor: Prof. Akiyoshi Shioura"
+        },
+        {
+          "period": "Oct 2025",
+          "detail": "Applied Programming (Institute of Science Tokyo), Instructor: Asst. Prof. Nobutaka Shimizu"
+        },
+        {
+          "period": "Oct 2025",
+          "detail": "Theory and Applications of Discrete Optimization (Institute of Science Tokyo), Instructor: Prof. Akiyoshi Shioura"
+        },
+        {
+          "period": "Jun 2025",
+          "detail": "Mathematics for Management and Economics (Institute of Science Tokyo), Instructor: Prof. Akiyoshi Shioura"
+        }
+      ]
+    }
+  ],
+  "paper_sections": [
+    {
+      "title": "Journal Papers (Peer-Reviewed)",
+      "items": [
+        {
+          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
+          "title": "An Efficient Algorithm for Computing Average Network Flow",
+          "venue": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
+          "venue_url": "https://doi.org/10.15807/jorsj.69.39",
+          "links": [
+            {
+              "label": "DOI",
+              "url": "https://doi.org/10.15807/jorsj.69.39"
+            }
+          ],
+          "note": "Preliminary version appeared in WAAC 2025."
+        }
+      ]
+    },
+    {
+      "title": "International Conferences (Peer-Reviewed)",
+      "items": [
+        {
+          "authors": "Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura",
+          "title": "An Efficient Algorithm for Computing Average Network Flow",
+          "venue": "The 25th Japan–Korea Joint Workshop on Algorithms and Computation (WAAC 2025), Hokkaido University, Sapporo, Japan, August 19–20, 2025.",
+          "venue_url": "https://waac-alg-comp.github.io/2025/",
+          "links": [
+            {
+              "label": "Conference",
+              "url": "https://waac-alg-comp.github.io/2025/"
+            },
+            {
+              "label": "Accepted Papers",
+              "url": "https://waac-alg-comp.github.io/2025/accepted.html"
+            }
+          ],
+          "note": ""
+        }
+      ]
+    },
+    {
+      "title": "Domestic Conferences / Workshops / Symposiums",
+      "items": [
+        {
+          "authors": "Yutaro Fuse and Nobutaka Shimizu",
+          "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
+          "venue": "Summer LA Symposium 2026, Mito Civic Center, July 27–29, 2026.",
+          "venue_url": "",
+          "links": [],
+          "note": ""
+        },
+        {
+          "authors": "Yutaro Fuse, Nobutaka Shimizu, and Akiyoshi Shioura",
+          "title": "Approximation Algorithms for the Average Network Flow Maximization Problem",
+          "venue": "Winter LA Symposium 2025, Research Institute for Mathematical Sciences, Kyoto University, January 26–28, 2026.",
+          "venue_url": "",
+          "links": [],
+          "note": ""
+        }
+      ]
+    }
+  ],
+  "slides": [
+    {
+      "title": "Multiplicative Weights Update for Absolute Algebraic Connectivity",
+      "url": "https://drive.google.com/open?id=1Xsue-ekTCK_cSTI5VE20d6UGaODKuBxc",
+      "meta": "Summer LA Symposium 2026 / Yutaro Fuse and Nobutaka Shimizu"
+    },
+    {
+      "title": "Approximation Algorithms for the Average Network Flow Maximization Problem",
+      "url": "https://drive.google.com/open?id=1h9NMGaleGuk3OnkEP_HIbttmViY0dE4_",
+      "meta": "Winter LA Symposium 2025 / Yutaro Fuse, Nobutaka Shimizu, and Akiyoshi Shioura"
+    },
+    {
+      "title": "An Efficient Algorithm for Computing Average Network Flow",
+      "url": "https://drive.google.com/open?id=1qrQ-ulUzXOoM2To9sJoATFkDiKg7WGjE",
+      "meta": "WAAC 2025 / Yutaro Fuse, Tomomi Matsui, Nobutaka Shimizu, and Akiyoshi Shioura"
+    },
+    {
+      "title": "Seminar Notes",
+      "url": "https://drive.google.com/open?id=1y0b2akFXoO6vOMzMp1oT42ZRBDQAHRIL",
+      "meta": "Seminar on Industrial Engineering and Economics (min-cut / edge-connectivity augmentation, etc.)"
+    }
+  ]
+}

@@ -74,9 +74,19 @@
       <section id="editor-view" hidden>
         <div class="toolbar">
           <p id="status" class="status">読み込み中…</p>
-          <button type="button" id="save-btn" class="btn btn--primary">
-            GitHub に保存
-          </button>
+          <div class="toolbar__right">
+            <div class="lang-edit" aria-label="編集言語">
+              <button type="button" class="tab is-active" id="lang-ja" data-edit-lang="ja">
+                日本語
+              </button>
+              <button type="button" class="tab" id="lang-en" data-edit-lang="en">
+                English
+              </button>
+            </div>
+            <button type="button" id="save-btn" class="btn btn--primary">
+              GitHub に保存
+            </button>
+          </div>
         </div>
 
         <nav class="tabs" aria-label="編集タブ">
