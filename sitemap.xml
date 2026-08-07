@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://yutarofuse37.github.io/sites/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yutarofuse37.github.io/sites/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yutarofuse37.github.io/sites/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yutarofuse37.github.io/sites/" />
+  </url>
+  <url>
+    <loc>https://yutarofuse37.github.io/sites/papers.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yutarofuse37.github.io/sites/papers.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yutarofuse37.github.io/sites/en/papers.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yutarofuse37.github.io/sites/papers.html" />
+  </url>
+  <url>
+    <loc>https://yutarofuse37.github.io/sites/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yutarofuse37.github.io/sites/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yutarofuse37.github.io/sites/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yutarofuse37.github.io/sites/" />
+  </url>
+  <url>
+    <loc>https://yutarofuse37.github.io/sites/en/papers.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yutarofuse37.github.io/sites/papers.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://yutarofuse37.github.io/sites/en/papers.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yutarofuse37.github.io/sites/papers.html" />
+  </url>
+</urlset>
