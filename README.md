@@ -31,6 +31,19 @@ Papers/Talks は `data/papers.json` にまとめて登録します（1回の編�
 - `data/papers.json` — Papers/Talks（日英共通・スライド含む）
 - `assets/uploads/` — 写真などのアップロード先
 
+## 検索エンジンに載せる（クロール）
+
+公開ページはもともとインデックス可能です（`admin/` だけ `noindex`）。見つけてもらうには次を行います。
+
+1. この PR マージ後、`robots.txt` と `sitemap.xml` がデプロイされるのを待つ
+2. [Google Search Console](https://search.google.com/search-console) でプロパティを追加  
+   - URL プレフィックス: `https://yutarofuse37.github.io/sites/`
+3. 所有権確認（HTML タグ / Google アカウントなど）
+4. 「サイトマップ」に `https://yutarofuse37.github.io/sites/sitemap.xml` を送信
+5. 「URL 検査」でトップページを開き、「インデックス登録をリクエスト」
+
+補足: GitHub Pages のプロジェクトサイトでは、ホスト直下の `robots.txt`（`https://yutarofuse37.github.io/robots.txt`）が優先されます。未設置ならデフォルトでクロール可です。確実にするには Search Console でのサイトマップ送信が有効です。
+
 ## ローカルで確認
 
 ```bash

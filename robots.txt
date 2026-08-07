@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /sites/admin/
+Disallow: /admin/
+
+Sitemap: https://yutarofuse37.github.io/sites/sitemap.xml
