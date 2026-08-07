@@ -5,9 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>編集画面 — Yutaro Fuse</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./admin.css" />
   </head>
   <body>
-    <!-- Sveltia CMS: GitHub にログイン（または Personal Access Token）して編集できます -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <header class="top">
+      <div class="top__inner">
+        <strong>サイト編集</strong>
+        <div class="top__actions">
+          <a href="../index.html">サイトを見る</a>
+          <button type="button" id="logout-btn" class="btn btn--ghost" hidden>
+            ログアウト
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="login-view" class="card">
+        <h1>GitHub トークンでログイン</h1>
+        <p>
+          GitHub の「Sign in with GitHub」ボタンは別サーバーが必要なため使えません。
+          代わりに <strong>Personal Access Token</strong> を使います（1回作ればOK）。
+        </p>
+
+        <ol class="steps">
+          <li>
+            <a
+              href="https://github.com/settings/personal-access-tokens/new"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Fine-grained token 作成ページ</a
+            >
+            を開く
+          </li>
+          <li>Token name に例: <code>sites-editor</code></li>
+          <li>Repository access で <code>yutarofuse37/sites</code> だけを選択</li>
+          <li>
+            Permissions → Repository permissions → <strong>Contents: Read and
+            write</strong>
+          </li>
+          <li>Generate token して、表示されたトークンを下に貼る</li>
+        </ol>
+
+        <label class="field">
+          <span>Personal Access Token</span>
+          <input
+            id="token-input"
+            type="password"
+            autocomplete="off"
+            placeholder="github_pat_..."
+          />
+        </label>
+
+        <p id="login-error" class="error" hidden></p>
+
+        <button type="button" id="login-btn" class="btn btn--primary">
+          ログインして編集を開始
+        </button>
+      </section>
+
+      <section id="editor-view" hidden>
+        <div class="toolbar">
+          <p id="status" class="status">読み込み中…</p>
+          <button type="button" id="save-btn" class="btn btn--primary">
+            GitHub に保存
+          </button>
+        </div>
+
+        <nav class="tabs" aria-label="編集タブ">
+          <button type="button" class="tab is-active" data-tab="profile">
+            プロフィール
+          </button>
+          <button type="button" class="tab" data-tab="education">学歴</button>
+          <button type="button" class="tab" data-tab="experience">経歴</button>
+          <button type="button" class="tab" data-tab="papers">論文</button>
+          <button type="button" class="tab" data-tab="slides">スライド</button>
+        </nav>
+
+        <div id="panel-profile" class="panel card"></div>
+        <div id="panel-education" class="panel card" hidden></div>
+        <div id="panel-experience" class="panel card" hidden></div>
+        <div id="panel-papers" class="panel card" hidden></div>
+        <div id="panel-slides" class="panel card" hidden></div>
+      </section>
+    </main>
+
+    <script src="./admin.js"></script>
   </body>
 </html>

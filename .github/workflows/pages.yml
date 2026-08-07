@@ -27,6 +27,8 @@ jobs:
           cp index.html papers.html slides.html styles.css site.js favicon.svg .nojekyll _site/
           cp -r data admin _site/
           mkdir -p _site/assets/uploads
+          # keep only needed admin assets
+          rm -f _site/admin/config.yml
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
