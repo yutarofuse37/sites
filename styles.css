@@ -90,6 +90,57 @@ a:focus-visible {
   padding: 2rem 1.25rem 3rem;
 }
 
+.profile-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-head__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.profile-head__text h1 {
+  margin-top: 0;
+}
+
+.profile-photo {
+  flex: 0 0 auto;
+  width: 8.5rem;
+  margin-top: 0.15rem;
+}
+
+.profile-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: #f7f7f7;
+}
+
+.profile-photo--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  border: 1px dashed #ccc;
+  background: #fafafa;
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.site-note {
+  margin: 2.5rem 0 0;
+  color: #999;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
 h1 {
   margin: 0 0 0.75rem;
   font-size: 1.85rem;
@@ -152,7 +203,7 @@ section p {
 
 .link-map {
   list-style: none;
-  margin: 0.75rem 0 0;
+  margin: 0.35rem 0 1rem;
   padding: 0;
 }
 
@@ -280,6 +331,14 @@ a.pub-venue {
 @media (max-width: 700px) {
   .list li {
     grid-template-columns: 1fr;
+  }
+
+  .profile-head {
+    flex-direction: column-reverse;
+  }
+
+  .profile-photo {
+    width: 7.5rem;
   }
 
   .site-header__inner {

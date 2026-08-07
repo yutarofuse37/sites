@@ -23,6 +23,8 @@
           papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
+          photoAlt: "Portrait",
+          photoPlaceholder: "Photo",
         }
       : {
           loading: "読み込み中…",
@@ -37,6 +39,8 @@
             '論文・発表は <a href="./papers.html">Papers/Talks</a> を参照してください。',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
+          photoAlt: "顔写真",
+          photoPlaceholder: "写真",
         };
 
   const escapeHtml = (text) =>
@@ -178,10 +182,30 @@
       .filter(Boolean)
       .join("");
     if (!items) return "";
-    return `<section>
-      <h2>${copy.links}</h2>
-      <ul class="link-map">${items}</ul>
-    </section>`;
+    return `<h3>${copy.links}</h3>
+      <ul class="link-map">${items}</ul>`;
+  };
+
+  const mediaUrl = (url) => {
+    const value = String(url || "").trim();
+    if (!value) return "";
+    if (/^https?:\/\//i.test(value)) return safeUrl(value);
+    // Site-root relative path (e.g. assets/uploads/photo.jpg)
+    return `${base}${value.replace(/^\.?\//, "")}`;
+  };
+
+  const renderPhoto = (profile) => {
+    const src = mediaUrl(profile.photo);
+    if (src) {
+      return `<div class="profile-photo">
+        <img src="${escapeHtml(src)}" alt="${escapeHtml(
+        copy.photoAlt
+      )}" width="160" height="200" loading="lazy" />
+      </div>`;
+    }
+    return `<div class="profile-photo profile-photo--empty" aria-hidden="true">
+      <span>${escapeHtml(copy.photoPlaceholder)}</span>
+    </div>`;
   };
 
   const renderHome = (data, root) => {
@@ -208,17 +232,27 @@
       )
       .join("");
 
+    const urlNote = String(p.url_note || "").trim();
+    const urlNoteHtml = urlNote
+      ? `<p class="site-note">${escapeHtml(urlNote)}</p>`
+      : "";
+
     root.innerHTML = `
-      <h1>${escapeHtml(displayName)}</h1>
-      <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
+      <div class="profile-head">
+        <div class="profile-head__text">
+          <h1>${escapeHtml(displayName)}</h1>
+          <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
+        </div>
+        ${renderPhoto(p)}
+      </div>
       <section>
         <h2>${copy.about}</h2>
         ${intro}
+        ${renderLinkMap(data.links)}
         <p>${copy.papersHint}</p>
       </section>
-      ${renderLinkMap(data.links)}
       <section>
         <h2>${copy.education}</h2>
         ${renderEducation(data.education || [])}
@@ -227,6 +261,7 @@
         <h2>${copy.experience}</h2>
         ${experience}
       </section>
+      ${urlNoteHtml}
     `;
 
     document.title = `${displayName} — Yutaro Fuse`;

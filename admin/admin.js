@@ -152,9 +152,20 @@
       ${field("所属", "affiliation", p.affiliation || "")}
       ${field("研究室名（自己紹介文中でリンク化）", "lab_name", p.lab_name || "")}
       ${field("研究室 URL", "lab_url", p.lab_url || "")}
+      ${field(
+        "写真 URL（例: assets/uploads/photo.jpg または https://...）",
+        "photo",
+        p.photo || ""
+      )}
       ${field("メール（表示用・リンクなし）", "email", p.email || "")}
       ${field("サイト説明（SEO）", "description", p.description || "", true)}
       ${field("自己紹介（段落は空行で区切る）", "intro", introText, true)}
+      ${field(
+        "URLの37についての注記（小さく表示・空なら非表示）",
+        "url_note",
+        p.url_note || "",
+        true
+      )}
       ${field(
         "リンクマップ（表示名|URL を1行ずつ。researchmap / Google Scholar / ORCID など）",
         "links",
@@ -363,9 +374,11 @@
         affiliation: profileFields.affiliation || "",
         lab_name: profileFields.lab_name || "",
         lab_url: profileFields.lab_url || "",
+        photo: profileFields.photo || "",
         email: profileFields.email || "",
         description: profileFields.description || "",
         intro,
+        url_note: profileFields.url_note || "",
       },
       links,
       education,
