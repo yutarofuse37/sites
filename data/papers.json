@@ -35,10 +35,6 @@
           "venue_url": "https://waac-alg-comp.github.io/2025/",
           "links": [
             {
-              "label": "Conference",
-              "url": "https://waac-alg-comp.github.io/2025/"
-            },
-            {
               "label": "Accepted Papers",
               "url": "https://waac-alg-comp.github.io/2025/accepted.html"
             }
