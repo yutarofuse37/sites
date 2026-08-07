@@ -10,7 +10,7 @@
           "title_ja": "An Efficient Algorithm for Computing Average Network Flow",
           "venue": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
           "venue_ja": "Journal of the Operations Research Society of Japan, Vol. 69, No. 2, April 2026, pp. 39–46.",
-          "venue_url": "https://doi.org/10.15807/jorsj.69.39",
+          "venue_url": "",
           "links": [
             {
               "label": "DOI",
@@ -66,7 +66,7 @@
         {
           "authors": "Yutaro Fuse, Nobutaka Shimizu, and Akiyoshi Shioura",
           "authors_ja": "布施 祐大郎，清水 伸高，塩浦 昭義",
-          "title": "Approximation Algorithms for the Average Network Flow Maximization Problem",
+          "title": "An Approximation Algorithm for the Average Network Flow Maximization Problem",
           "title_ja": "Average Network Flow 最大化問題に対する近似解法",
           "venue": "Winter LA Symposium 2025, Research Institute for Mathematical Sciences, Kyoto University, January 26–28, 2026.",
           "venue_ja": "2025年度 冬のLAシンポジウム，京都大学数理解析研究所，2026年1月26日–28日。",
