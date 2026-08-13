@@ -33,16 +33,28 @@ Papers/Talks は `data/papers.json` にまとめて登録します（1回の編�
 
 ## 検索エンジンに載せる（クロール）
 
-公開ページはもともとインデックス可能です（`admin/` だけ `noindex`）。見つけてもらうには次を行います。
+公開ページはインデックス可能です（`admin/` だけ `noindex`）。  
+**新しい個人サイトは、設定だけではすぐ検索に出ません。** Google に「登録して」と伝える必要があります。
 
-1. この PR マージ後、`robots.txt` と `sitemap.xml` がデプロイされるのを待つ
-2. [Google Search Console](https://search.google.com/search-console) でプロパティを追加  
-   - URL プレフィックス: `https://yutarofuse37.github.io/sites/`
-3. 所有権確認（HTML タグ / Google アカウントなど）
-4. 「サイトマップ」に `https://yutarofuse37.github.io/sites/sitemap.xml` を送信
-5. 「URL 検査」でトップページを開き、「インデックス登録をリクエスト」
+### いまやること（Search Console）
 
-補足: GitHub Pages のプロジェクトサイトでは、ホスト直下の `robots.txt`（`https://yutarofuse37.github.io/robots.txt`）が優先されます。未設置ならデフォルトでクロール可です。確実にするには Search Console でのサイトマップ送信が有効です。
+1. [Google Search Console](https://search.google.com/search-console) を開く
+2. プロパティ追加（URL プレフィックス）: `https://yutarofuse37.github.io/sites/`
+3. 所有権確認（`googlefa359d70c6b997ed.html` は配置済み）
+4. 左メニュー「サイトマップ」→ `sitemap.xml` を送信  
+   （フルURL: `https://yutarofuse37.github.io/sites/sitemap.xml`）
+5. 「URL 検査」で次を1つずつ開き、「インデックス登録をリクエスト」
+   - `https://yutarofuse37.github.io/sites/`
+   - `https://yutarofuse37.github.io/sites/papers.html`
+6. 反映まで数日〜数週間かかることがあります。`site:yutarofuse37.github.io/sites` で確認できます。
+
+### サイト側で入れてある対策
+
+- `robots.txt` / `sitemap.xml`
+- canonical・hreflang・Person JSON-LD
+- **ビルド時プリレンダー**（HTML に本文を埋め込み。JS オフのクローラでも読める）
+
+補足: GitHub Pages のプロジェクトサイトでは、ホスト直下の `robots.txt`（`https://yutarofuse37.github.io/robots.txt`）が優先されます。未設置（404）ならデフォルトでクロール可です。
 
 ## ローカルで確認
 
