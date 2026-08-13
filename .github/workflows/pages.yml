@@ -23,6 +23,7 @@ jobs:
 
       - name: Prepare site files
         run: |
+          node scripts/prerender.mjs
           mkdir -p _site
           cp index.html papers.html styles.css site.js favicon.svg .nojekyll robots.txt sitemap.xml googlefa359d70c6b997ed.html _site/
           cp -r data admin en assets _site/
