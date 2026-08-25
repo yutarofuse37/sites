@@ -301,6 +301,11 @@
   const readFields = (root) => {
     const result = {};
     root.querySelectorAll("[data-name]").forEach((el) => {
+      // Nested .item-card fields belong to the child card, not this root.
+      const ownerCard = el.closest(".item-card");
+      if (ownerCard && root.classList?.contains("item-card") && ownerCard !== root) {
+        return;
+      }
       result[el.dataset.name] = el.value;
     });
     return result;
