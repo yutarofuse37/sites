@@ -419,9 +419,9 @@
               links,
               note: f.note || "",
               note_ja: f.note_ja || "",
+              slide_url: f.slide_url || "",
+              slide_label: f.slide_label || "",
             };
-            if (f.slide_url) entry.slide_url = f.slide_url;
-            if (f.slide_label) entry.slide_label = f.slide_label;
             return entry;
           }
         );
