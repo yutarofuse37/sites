@@ -152,7 +152,7 @@ a:focus-visible {
     var(--board) 55%,
     #15261c
   );
-  outline: 1px solid color-mix(in srgb, var(--chalk-yellow) 55%, transparent);
+  outline: 1px solid rgba(226, 195, 74, 0.55);
   outline-offset: 3px;
   animation: stage-in 0.7s ease both;
 }
@@ -172,7 +172,7 @@ a:focus-visible {
   aspect-ratio: 3 / 4;
   color: rgba(245, 245, 240, 0.55);
   font-size: 0.85rem;
-  outline: 1px dashed color-mix(in srgb, var(--chalk-yellow) 40%, transparent);
+  outline: 1px dashed rgba(226, 195, 74, 0.4);
 }
 
 .site-note {
@@ -193,7 +193,7 @@ h2 {
   margin: 2rem 0 0.75rem;
   padding-bottom: 0.35rem;
   border-bottom: 2px solid var(--red);
-  box-shadow: 0 1px 0 color-mix(in srgb, var(--chalk-yellow) 35%, transparent);
+  box-shadow: 0 1px 0 rgba(226, 195, 74, 0.35);
   font-size: 1.25rem;
   font-weight: 700;
 }
