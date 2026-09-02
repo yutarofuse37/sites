@@ -162,27 +162,30 @@ body[data-page="home"] .nav a.is-active {
   }
 }
 
-/* dark left/center | chalkboard right (image as right background) */
+/* dark left | name center-left | chalkboard focal on right */
 .hero {
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: stretch;
-  min-height: clamp(20rem, 56vh, 30rem);
+  min-height: clamp(21rem, 58vh, 32rem);
   width: 100%;
   margin: 0;
   overflow: hidden;
   color: var(--chalk);
-  background: var(--board-deep);
+  background:
+    radial-gradient(80% 70% at 12% 80%, rgba(226, 195, 74, 0.07), transparent 55%),
+    var(--board-deep);
 }
 
 .hero__board {
   position: absolute;
   inset: 0 0 0 auto;
-  width: clamp(16rem, 46vw, 38rem);
+  width: clamp(20rem, 58vw, 46rem);
   z-index: 0;
   overflow: hidden;
   background: var(--board);
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .hero__bg {
@@ -190,8 +193,10 @@ body[data-page="home"] .nav a.is-active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 48% 40%;
-  animation: hero-board-in 1s ease both;
+  /* Bias toward S(x) diagram / integral — right of image center */
+  object-position: 68% 36%;
+  transform-origin: 65% 40%;
+  animation: hero-board-in 1.05s ease both;
 }
 
 .hero__bg--empty {
@@ -204,17 +209,18 @@ body[data-page="home"] .nav a.is-active {
   z-index: 1;
   display: flex;
   align-items: center;
-  width: min(100%, 42rem);
-  flex: 1 1 auto;
+  width: min(100%, 34rem);
+  flex: 0 1 auto;
   margin-right: auto;
-  padding: 2.35rem 1.25rem 2.2rem;
+  padding: 2.5rem 1.25rem 2.3rem;
   padding-left: max(1.25rem, calc((100vw - 860px) / 2));
+  /* Narrower, softer veil so the board diagram stays visible */
   background: linear-gradient(
-    90deg,
+    100deg,
     var(--board-deep) 0%,
-    var(--board-deep) 52%,
-    rgba(16, 25, 20, 0.92) 72%,
-    rgba(16, 25, 20, 0.4) 88%,
+    var(--board-deep) 68%,
+    rgba(16, 25, 20, 0.72) 86%,
+    rgba(16, 25, 20, 0.18) 96%,
     transparent 100%
   );
 }
@@ -222,21 +228,57 @@ body[data-page="home"] .nav a.is-active {
 .hero__copy {
   position: relative;
   z-index: 1;
-  max-width: 28rem;
+  max-width: 24rem;
+  padding-left: 1.05rem;
   animation: hero-copy-in 0.65s ease both;
 }
 
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  bottom: 0.45rem;
+  width: 3px;
+  border-radius: 1px;
+  background: linear-gradient(
+    180deg,
+    var(--chalk-yellow) 0%,
+    rgba(226, 195, 74, 0.35) 70%,
+    transparent 100%
+  );
+}
+
 .hero__copy h1 {
-  margin: 0 0 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.28rem;
+  margin: 0 0 0.85rem;
   color: var(--chalk);
-  font-size: clamp(1.8rem, 3.6vw, 2.35rem);
-  line-height: 1.3;
-  text-wrap: balance;
+  font-size: clamp(1.85rem, 3.8vw, 2.45rem);
+  line-height: 1.25;
+}
+
+.hero__name {
+  display: inline-block;
+}
+
+.hero__reading {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.52em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(243, 239, 226, 0.72);
 }
 
 .hero__copy .meta {
   margin: 0;
-  color: rgba(243, 239, 226, 0.8);
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(226, 195, 74, 0.35);
+  color: rgba(243, 239, 226, 0.82);
+  max-width: 22rem;
 }
 
 .site-note {
@@ -459,8 +501,9 @@ a.pub-venue {
     position: relative;
     inset: auto;
     width: 100%;
-    height: 15.5rem;
+    height: 16rem;
     order: 2;
+    clip-path: none;
   }
 
   .hero__panel {
@@ -473,7 +516,15 @@ a.pub-venue {
   }
 
   .hero__bg {
-    object-position: 60% 38%;
+    object-position: 62% 34%;
+  }
+
+  .hero__copy {
+    max-width: none;
+  }
+
+  .hero__reading {
+    white-space: nowrap;
   }
 
   .site-header__inner {

@@ -199,6 +199,18 @@
     return `${base}${encoded}`;
   };
 
+
+  const formatHeroName = (name) => {
+    const value = String(name || "").trim();
+    const match = value.match(/^(.*?)([（(][^）)]+[）)])\s*$/u);
+    if (match && match[1].trim()) {
+      return `<span class="hero__name">${escapeHtml(
+        match[1].trim()
+      )}</span><span class="hero__reading">${escapeHtml(match[2])}</span>`;
+    }
+    return `<span class="hero__name">${escapeHtml(value)}</span>`;
+  };
+
   const renderPhoto = (profile) => {
     const src = mediaUrl(profile.photo);
     if (src) {
@@ -245,7 +257,7 @@
       <header class="hero">
         <div class="hero__panel">
           <div class="hero__copy">
-            <h1>${escapeHtml(displayName)}</h1>
+            <h1>${formatHeroName(displayName)}</h1>
             <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
