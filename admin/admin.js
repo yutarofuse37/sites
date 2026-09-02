@@ -153,7 +153,7 @@
       ${field("研究室名（自己紹介文中でリンク化）", "lab_name", p.lab_name || "")}
       ${field("研究室 URL", "lab_url", p.lab_url || "")}
       ${field(
-        "写真 URL（例: assets/uploads/photo.jpg または https://...）",
+        "画像 URL（顔写真以外でも可。例: assets/uploads/photo.jpg または https://...）",
         "photo",
         p.photo || ""
       )}
