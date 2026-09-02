@@ -188,9 +188,9 @@ const renderHome = (data, lang) => {
   )}</p>
         </div>
       </div>
-      ${renderPhoto(p, lang)}
-      <section>
+      <section class="about-block">
         <h2>${about}</h2>
+        ${renderPhoto(p, lang)}
         ${intro}
         ${renderLinkMap(data.links, lang)}
         <p>${papersHint}</p>

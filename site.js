@@ -251,9 +251,9 @@
     }: ${escapeHtml(p.email)}</p>
         </div>
       </div>
-      ${renderPhoto(p)}
-      <section>
+      <section class="about-block">
         <h2>${copy.about}</h2>
+        ${renderPhoto(p)}
         ${intro}
         ${renderLinkMap(data.links)}
         <p>${copy.papersHint}</p>

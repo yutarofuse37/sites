@@ -98,10 +98,15 @@ a:focus-visible {
   margin-top: 0;
 }
 
+.about-block {
+  overflow: auto;
+}
+
 /* Chalkboard / site visual — not a face-portrait crop */
 .profile-visual {
-  margin: 1rem 0 1.85rem;
-  max-width: min(100%, 24rem);
+  float: right;
+  margin: 0.15rem 0 1rem 1.35rem;
+  max-width: min(42%, 15.5rem);
   padding: 0;
 }
 
@@ -118,7 +123,6 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   aspect-ratio: 3 / 4;
-  max-width: min(100%, 16rem);
   border: 1px dashed #ccc;
   background: #fafafa;
   color: #bbb;
@@ -325,7 +329,10 @@ a.pub-venue {
   }
 
   .profile-visual {
-    max-width: min(100%, 20rem);
+    float: none;
+    display: block;
+    margin: 0.75rem 0 1.25rem;
+    max-width: min(100%, 16rem);
   }
 
   .site-header__inner {
