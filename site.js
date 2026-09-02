@@ -202,11 +202,13 @@
   const renderPhoto = (profile) => {
     const src = mediaUrl(profile.photo);
     if (src) {
-      return `<img class="hero__bg" src="${escapeHtml(src)}" alt="${escapeHtml(
+      return `<div class="hero__board"><img class="hero__bg" src="${escapeHtml(
+        src
+      )}" alt="${escapeHtml(
         copy.photoAlt
-      )}" width="890" height="1188" loading="eager" decoding="async" />`;
+      )}" width="890" height="1188" loading="eager" decoding="async" /></div>`;
     }
-    return `<div class="hero__bg hero__bg--empty" aria-hidden="true"></div>`;
+    return `<div class="hero__board"><div class="hero__bg hero__bg--empty" aria-hidden="true"></div></div>`;
   };
 
   const renderHome = (data, root) => {
@@ -241,14 +243,15 @@
     root.className = "page page--home";
     root.innerHTML = `
       <header class="hero">
-        ${renderPhoto(p)}
-        <div class="hero__veil" aria-hidden="true"></div>
-        <div class="hero__copy">
-          <h1>${escapeHtml(displayName)}</h1>
-          <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
+        <div class="hero__panel">
+          <div class="hero__copy">
+            <h1>${escapeHtml(displayName)}</h1>
+            <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
+          </div>
         </div>
+        ${renderPhoto(p)}
       </header>
       <div class="page-body">
         <section>

@@ -129,11 +129,13 @@ const renderPhoto = (profile, lang) => {
       ? "黒板に書かれた数式の図"
       : "Mathematical diagram on a chalkboard";
   if (src) {
-    return `<img class="hero__bg" src="${escapeHtml(src)}" alt="${escapeHtml(
+    return `<div class="hero__board"><img class="hero__bg" src="${escapeHtml(
+      src
+    )}" alt="${escapeHtml(
       alt
-    )}" width="890" height="1188" loading="eager" decoding="async" />`;
+    )}" width="890" height="1188" loading="eager" decoding="async" /></div>`;
   }
-  return `<div class="hero__bg hero__bg--empty" aria-hidden="true"></div>`;
+  return `<div class="hero__board"><div class="hero__bg hero__bg--empty" aria-hidden="true"></div></div>`;
 };
 
 const renderHome = (data, lang) => {
@@ -176,14 +178,15 @@ const renderHome = (data, lang) => {
 
   return `
       <header class="hero">
-        ${renderPhoto(p, lang)}
-        <div class="hero__veil" aria-hidden="true"></div>
-        <div class="hero__copy">
-          <h1>${escapeHtml(displayName)}</h1>
-          <p class="meta">${escapeHtml(p.affiliation || "")}<br />${emailLabel}: ${escapeHtml(
+        <div class="hero__panel">
+          <div class="hero__copy">
+            <h1>${escapeHtml(displayName)}</h1>
+            <p class="meta">${escapeHtml(p.affiliation || "")}<br />${emailLabel}: ${escapeHtml(
     p.email
   )}</p>
+          </div>
         </div>
+        ${renderPhoto(p, lang)}
       </header>
       <div class="page-body">
         <section>
