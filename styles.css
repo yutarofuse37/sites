@@ -169,8 +169,8 @@ body[data-page="home"] .nav a.is-active {
   display: flex;
   align-items: stretch;
   min-height: clamp(20rem, 56vh, 30rem);
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   overflow: hidden;
   color: var(--chalk);
   background: var(--board-deep);
@@ -178,10 +178,8 @@ body[data-page="home"] .nav a.is-active {
 
 .hero__board {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(54%, 34rem);
+  inset: 0 0 0 auto;
+  width: clamp(16rem, 46vw, 38rem);
   z-index: 0;
   overflow: hidden;
   background: var(--board);
@@ -206,15 +204,17 @@ body[data-page="home"] .nav a.is-active {
   z-index: 1;
   display: flex;
   align-items: center;
-  width: min(100%, 40rem);
+  width: min(100%, 42rem);
   flex: 1 1 auto;
-  padding: 2.35rem clamp(1.25rem, 4vw, 2.6rem) 2.2rem;
+  margin-right: auto;
+  padding: 2.35rem 1.25rem 2.2rem;
+  padding-left: max(1.25rem, calc((100vw - 860px) / 2));
   background: linear-gradient(
     90deg,
     var(--board-deep) 0%,
-    var(--board-deep) 58%,
-    rgba(16, 25, 20, 0.88) 78%,
-    rgba(16, 25, 20, 0.35) 90%,
+    var(--board-deep) 52%,
+    rgba(16, 25, 20, 0.92) 72%,
+    rgba(16, 25, 20, 0.4) 88%,
     transparent 100%
   );
 }
@@ -457,6 +457,7 @@ a.pub-venue {
 
   .hero__board {
     position: relative;
+    inset: auto;
     width: 100%;
     height: 15.5rem;
     order: 2;
@@ -465,7 +466,9 @@ a.pub-venue {
   .hero__panel {
     width: 100%;
     order: 1;
+    margin: 0;
     padding: 2rem 1.2rem 1.7rem;
+    padding-left: 1.2rem;
     background: var(--board-deep);
   }
 
