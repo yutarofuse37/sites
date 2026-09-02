@@ -209,26 +209,26 @@ body[data-page="home"] .nav a.is-active {
   z-index: 1;
   display: flex;
   align-items: center;
-  width: min(100%, 34rem);
-  flex: 0 1 auto;
-  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
   padding: 2.5rem 1.25rem 2.3rem;
-  padding-left: max(1.25rem, calc((100vw - 860px) / 2));
-  /* Narrower, softer veil so the board diagram stays visible */
+  /* Soft veil across the left; board diagram stays clear on the right */
   background: linear-gradient(
     100deg,
     var(--board-deep) 0%,
-    var(--board-deep) 68%,
-    rgba(16, 25, 20, 0.72) 86%,
-    rgba(16, 25, 20, 0.18) 96%,
-    transparent 100%
+    var(--board-deep) 42%,
+    rgba(16, 25, 20, 0.78) 58%,
+    rgba(16, 25, 20, 0.28) 72%,
+    transparent 86%
   );
 }
 
 .hero__copy {
   position: relative;
   z-index: 1;
-  max-width: min(100%, 28rem);
+  width: min(28rem, 100%);
+  min-width: 0;
+  margin-left: max(0px, calc((100vw - 860px) / 2));
   padding-left: 1.05rem;
   animation: hero-copy-in 0.65s ease both;
 }
@@ -279,7 +279,9 @@ body[data-page="home"] .nav a.is-active {
   padding-top: 0.55rem;
   border-top: 1px solid rgba(226, 195, 74, 0.35);
   color: rgba(243, 239, 226, 0.82);
-  max-width: 22rem;
+  max-width: 26rem;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .site-note {
@@ -512,8 +514,12 @@ a.pub-venue {
     order: 1;
     margin: 0;
     padding: 2rem 1.2rem 1.7rem;
-    padding-left: 1.2rem;
     background: var(--board-deep);
+  }
+
+  .hero__copy {
+    margin-left: 0;
+    width: 100%;
   }
 
   .hero__bg {
