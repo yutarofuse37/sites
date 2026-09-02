@@ -202,15 +202,11 @@
   const renderPhoto = (profile) => {
     const src = mediaUrl(profile.photo);
     if (src) {
-      return `<figure class="profile-visual">
-        <img src="${escapeHtml(src)}" alt="${escapeHtml(
+      return `<img class="hero__bg" src="${escapeHtml(src)}" alt="${escapeHtml(
         copy.photoAlt
-      )}" width="890" height="1188" loading="eager" decoding="async" />
-      </figure>`;
+      )}" width="890" height="1188" loading="eager" decoding="async" />`;
     }
-    return `<div class="profile-visual profile-visual--empty" aria-hidden="true">
-      <span>${escapeHtml(copy.photoPlaceholder)}</span>
-    </div>`;
+    return `<div class="hero__bg hero__bg--empty" aria-hidden="true"></div>`;
   };
 
   const renderHome = (data, root) => {
@@ -242,31 +238,35 @@
       ? `<p class="site-note">${escapeHtml(urlNote)}</p>`
       : "";
 
+    root.className = "page page--home";
     root.innerHTML = `
-      <div class="profile-stage">
+      <header class="hero">
         ${renderPhoto(p)}
-        <div class="profile-stage__copy">
+        <div class="hero__veil" aria-hidden="true"></div>
+        <div class="hero__copy">
           <h1>${escapeHtml(displayName)}</h1>
           <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
         </div>
+      </header>
+      <div class="page-body">
+        <section>
+          <h2>${copy.about}</h2>
+          ${intro}
+          ${renderLinkMap(data.links)}
+          <p>${copy.papersHint}</p>
+        </section>
+        <section>
+          <h2>${copy.education}</h2>
+          ${renderEducation(data.education || [])}
+        </section>
+        <section>
+          <h2>${copy.experience}</h2>
+          ${experience}
+        </section>
+        ${urlNoteHtml}
       </div>
-      <section>
-        <h2>${copy.about}</h2>
-        ${intro}
-        ${renderLinkMap(data.links)}
-        <p>${copy.papersHint}</p>
-      </section>
-      <section>
-        <h2>${copy.education}</h2>
-        ${renderEducation(data.education || [])}
-      </section>
-      <section>
-        <h2>${copy.experience}</h2>
-        ${experience}
-      </section>
-      ${urlNoteHtml}
     `;
 
     document.title = `${displayName} — Yutaro Fuse`;
@@ -277,6 +277,7 @@
   };
 
   const renderPapers = (data, root) => {
+    root.className = "page";
     const sections = (data.paper_sections || [])
       .map((section) => {
         const items = (section.items || [])

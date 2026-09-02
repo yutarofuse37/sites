@@ -128,17 +128,12 @@ const renderPhoto = (profile, lang) => {
     lang === "ja"
       ? "黒板に書かれた数式の図"
       : "Mathematical diagram on a chalkboard";
-  const placeholder = lang === "ja" ? "画像" : "Image";
   if (src) {
-    return `<figure class="profile-visual"><img src="${escapeHtml(
-      src
-    )}" alt="${escapeHtml(
+    return `<img class="hero__bg" src="${escapeHtml(src)}" alt="${escapeHtml(
       alt
-    )}" width="890" height="1188" loading="eager" decoding="async" /></figure>`;
+    )}" width="890" height="1188" loading="eager" decoding="async" />`;
   }
-  return `<div class="profile-visual profile-visual--empty" aria-hidden="true"><span>${escapeHtml(
-    placeholder
-  )}</span></div>`;
+  return `<div class="hero__bg hero__bg--empty" aria-hidden="true"></div>`;
 };
 
 const renderHome = (data, lang) => {
@@ -180,30 +175,33 @@ const renderHome = (data, lang) => {
     : "";
 
   return `
-      <div class="profile-stage">
+      <header class="hero">
         ${renderPhoto(p, lang)}
-        <div class="profile-stage__copy">
+        <div class="hero__veil" aria-hidden="true"></div>
+        <div class="hero__copy">
           <h1>${escapeHtml(displayName)}</h1>
           <p class="meta">${escapeHtml(p.affiliation || "")}<br />${emailLabel}: ${escapeHtml(
     p.email
   )}</p>
         </div>
+      </header>
+      <div class="page-body">
+        <section>
+          <h2>${about}</h2>
+          ${intro}
+          ${renderLinkMap(data.links, lang)}
+          <p>${papersHint}</p>
+        </section>
+        <section>
+          <h2>${education}</h2>
+          ${renderEducation(data.education || [], lang)}
+        </section>
+        <section>
+          <h2>${experience}</h2>
+          ${experienceHtml}
+        </section>
+        ${urlNoteHtml}
       </div>
-      <section>
-        <h2>${about}</h2>
-        ${intro}
-        ${renderLinkMap(data.links, lang)}
-        <p>${papersHint}</p>
-      </section>
-      <section>
-        <h2>${education}</h2>
-        ${renderEducation(data.education || [], lang)}
-      </section>
-      <section>
-        <h2>${experience}</h2>
-        ${experienceHtml}
-      </section>
-      ${urlNoteHtml}
     `;
 };
 
@@ -279,22 +277,17 @@ const renderPapers = (data, lang) => {
   return `<h1>${title}</h1>${sections}`;
 };
 
-const injectContent = (htmlPath, contentHtml) => {
+const injectContent = (htmlPath, contentHtml, pageClass = "page") => {
   const absolute = path.join(root, htmlPath);
   let html = fs.readFileSync(absolute, "utf8");
-  const replacement = `<main class="page" id="content">${contentHtml}\n    </main>`;
-  if (!html.includes('<main class="page" id="content"></main>')) {
-    // Allow already-prerendered or whitespace variants
-    html = html.replace(
-      /<main class="page" id="content">[\s\S]*?<\/main>/,
-      replacement
-    );
-  } else {
-    html = html.replace(
-      '<main class="page" id="content"></main>',
-      replacement
-    );
+  const replacement = `<main class="${pageClass}" id="content">${contentHtml}\n    </main>`;
+  if (!/<main class="page(?: page--home)?" id="content">/.test(html)) {
+    throw new Error(`Missing content main in ${htmlPath}`);
   }
+  html = html.replace(
+    /<main class="page(?: page--home)?" id="content">[\s\S]*?<\/main>/,
+    replacement
+  );
   // Drop noscript duplicate once real content is present
   html = html.replace(/<noscript>[\s\S]*?<\/noscript>\s*/g, "");
   fs.writeFileSync(absolute, html);
@@ -311,7 +304,7 @@ const papers = JSON.parse(
   fs.readFileSync(path.join(root, "data/papers.json"), "utf8")
 );
 
-injectContent("index.html", renderHome(siteJa, "ja"));
-injectContent("en/index.html", renderHome(siteEn, "en"));
+injectContent("index.html", renderHome(siteJa, "ja"), "page page--home");
+injectContent("en/index.html", renderHome(siteEn, "en"), "page page--home");
 injectContent("papers.html", renderPapers(papers, "ja"));
 injectContent("en/papers.html", renderPapers(papers, "en"));
