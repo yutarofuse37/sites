@@ -181,11 +181,11 @@ body[data-page="home"] .nav a.is-active {
 .hero__board {
   position: absolute;
   inset: 0 0 0 auto;
-  width: clamp(20rem, 58vw, 46rem);
+  width: clamp(22rem, 62vw, 50rem);
   z-index: 0;
   overflow: hidden;
   background: var(--board);
-  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .hero__bg {
@@ -228,7 +228,7 @@ body[data-page="home"] .nav a.is-active {
 .hero__copy {
   position: relative;
   z-index: 1;
-  max-width: 24rem;
+  max-width: min(100%, 28rem);
   padding-left: 1.05rem;
   animation: hero-copy-in 0.65s ease both;
 }
@@ -256,12 +256,13 @@ body[data-page="home"] .nav a.is-active {
   gap: 0.28rem;
   margin: 0 0 0.85rem;
   color: var(--chalk);
-  font-size: clamp(1.85rem, 3.8vw, 2.45rem);
+  font-size: clamp(1.7rem, 3.5vw, 2.25rem);
   line-height: 1.25;
 }
 
 .hero__name {
   display: inline-block;
+  white-space: nowrap;
 }
 
 .hero__reading {
