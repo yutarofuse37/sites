@@ -123,12 +123,13 @@ a:focus-visible {
   display: grid;
   grid-template-columns: minmax(11.5rem, 0.92fr) minmax(15rem, 1.2fr);
   gap: 1.35rem 1.85rem;
-  align-items: center;
+  align-items: start;
   margin: 0 0 0.35rem;
 }
 
 .profile-stage__copy {
   min-width: 0;
+  padding-top: 0.35rem;
   animation: stage-in 0.65s ease both;
   animation-delay: 0.08s;
 }
