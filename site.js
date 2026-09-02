@@ -205,7 +205,7 @@
       return `<figure class="profile-visual">
         <img src="${escapeHtml(src)}" alt="${escapeHtml(
         copy.photoAlt
-      )}" width="890" height="1188" loading="lazy" decoding="async" />
+      )}" width="890" height="1188" loading="eager" decoding="async" />
       </figure>`;
     }
     return `<div class="profile-visual profile-visual--empty" aria-hidden="true">
@@ -243,17 +243,17 @@
       : "";
 
     root.innerHTML = `
-      <div class="profile-head">
-        <div class="profile-head__text">
+      <div class="profile-stage">
+        ${renderPhoto(p)}
+        <div class="profile-stage__copy">
           <h1>${escapeHtml(displayName)}</h1>
           <p class="meta">${escapeHtml(p.affiliation || "")}<br />${
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
         </div>
       </div>
-      <section class="about-block">
+      <section>
         <h2>${copy.about}</h2>
-        ${renderPhoto(p)}
         ${intro}
         ${renderLinkMap(data.links)}
         <p>${copy.papersHint}</p>
