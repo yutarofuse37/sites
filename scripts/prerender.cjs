@@ -124,16 +124,19 @@ const renderLinkMap = (links, lang) => {
 
 const renderPhoto = (profile, lang) => {
   const src = mediaUrl(profile.photo, lang);
-  const alt = lang === "ja" ? "顔写真" : "Portrait";
-  const placeholder = lang === "ja" ? "写真" : "Photo";
+  const alt =
+    lang === "ja"
+      ? "黒板に書かれた数式の図"
+      : "Mathematical diagram on a chalkboard";
+  const placeholder = lang === "ja" ? "画像" : "Image";
   if (src) {
-    return `<div class="profile-photo"><img src="${escapeHtml(
+    return `<figure class="profile-visual"><img src="${escapeHtml(
       src
     )}" alt="${escapeHtml(
       alt
-    )}" width="160" height="200" loading="lazy" /></div>`;
+    )}" width="890" height="1188" loading="lazy" decoding="async" /></figure>`;
   }
-  return `<div class="profile-photo profile-photo--empty" aria-hidden="true"><span>${escapeHtml(
+  return `<div class="profile-visual profile-visual--empty" aria-hidden="true"><span>${escapeHtml(
     placeholder
   )}</span></div>`;
 };
@@ -184,10 +187,10 @@ const renderHome = (data, lang) => {
     p.email
   )}</p>
         </div>
-        ${renderPhoto(p, lang)}
       </div>
-      <section>
+      <section class="about-block">
         <h2>${about}</h2>
+        ${renderPhoto(p, lang)}
         ${intro}
         ${renderLinkMap(data.links, lang)}
         <p>${papersHint}</p>

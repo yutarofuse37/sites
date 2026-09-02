@@ -23,8 +23,8 @@
           papersHint: 'See <a href="./papers.html">Papers/Talks</a>.',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
-          photoAlt: "Portrait",
-          photoPlaceholder: "Photo",
+          photoAlt: "Mathematical diagram on a chalkboard",
+          photoPlaceholder: "Image",
         }
       : {
           loading: "読み込み中…",
@@ -39,8 +39,8 @@
             '論文・発表は <a href="./papers.html">Papers/Talks</a> を参照してください。',
           papersTitle: "Papers / Talks",
           emailLabel: "e-mail",
-          photoAlt: "顔写真",
-          photoPlaceholder: "写真",
+          photoAlt: "黒板に書かれた数式の図",
+          photoPlaceholder: "画像",
         };
 
   const escapeHtml = (text) =>
@@ -202,13 +202,13 @@
   const renderPhoto = (profile) => {
     const src = mediaUrl(profile.photo);
     if (src) {
-      return `<div class="profile-photo">
+      return `<figure class="profile-visual">
         <img src="${escapeHtml(src)}" alt="${escapeHtml(
         copy.photoAlt
-      )}" width="160" height="200" loading="lazy" />
-      </div>`;
+      )}" width="890" height="1188" loading="lazy" decoding="async" />
+      </figure>`;
     }
-    return `<div class="profile-photo profile-photo--empty" aria-hidden="true">
+    return `<div class="profile-visual profile-visual--empty" aria-hidden="true">
       <span>${escapeHtml(copy.photoPlaceholder)}</span>
     </div>`;
   };
@@ -250,10 +250,10 @@
       copy.emailLabel
     }: ${escapeHtml(p.email)}</p>
         </div>
-        ${renderPhoto(p)}
       </div>
-      <section>
+      <section class="about-block">
         <h2>${copy.about}</h2>
+        ${renderPhoto(p)}
         ${intro}
         ${renderLinkMap(data.links)}
         <p>${copy.papersHint}</p>
