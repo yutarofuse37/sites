@@ -134,7 +134,7 @@ const renderPhoto = (profile, lang) => {
       src
     )}" alt="${escapeHtml(
       alt
-    )}" width="890" height="1188" loading="lazy" decoding="async" /></figure>`;
+    )}" width="890" height="1188" loading="eager" decoding="async" /></figure>`;
   }
   return `<div class="profile-visual profile-visual--empty" aria-hidden="true"><span>${escapeHtml(
     placeholder
@@ -180,17 +180,17 @@ const renderHome = (data, lang) => {
     : "";
 
   return `
-      <div class="profile-head">
-        <div class="profile-head__text">
+      <div class="profile-stage">
+        ${renderPhoto(p, lang)}
+        <div class="profile-stage__copy">
           <h1>${escapeHtml(displayName)}</h1>
           <p class="meta">${escapeHtml(p.affiliation || "")}<br />${emailLabel}: ${escapeHtml(
     p.email
   )}</p>
         </div>
       </div>
-      <section class="about-block">
+      <section>
         <h2>${about}</h2>
-        ${renderPhoto(p, lang)}
         ${intro}
         ${renderLinkMap(data.links, lang)}
         <p>${papersHint}</p>

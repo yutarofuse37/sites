@@ -3,8 +3,11 @@
   --red-dark: #8e0000;
   --ink: #222;
   --muted: #555;
-  --line: #ddd;
-  --bg: #fff;
+  --line: #d8dbd6;
+  --bg: #f4f5f2;
+  --board: #1e3a2c;
+  --board-mid: #2a4a38;
+  --chalk-yellow: #e2c34a;
   --font: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
 }
 
@@ -21,6 +24,21 @@ body {
   font-size: 16px;
   line-height: 1.75;
   background: var(--bg);
+}
+
+body[data-page="home"] {
+  background:
+    radial-gradient(
+      120% 70% at 12% -10%,
+      rgba(30, 58, 44, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 50% at 100% 0%,
+      rgba(226, 195, 74, 0.08),
+      transparent 45%
+    ),
+    linear-gradient(180deg, #e8ece7 0%, var(--bg) 38%, #fafafa 100%);
 }
 
 a {
@@ -90,32 +108,61 @@ a:focus-visible {
   padding: 2rem 1.25rem 3rem;
 }
 
-.profile-head {
-  margin-bottom: 0.35rem;
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.55rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.profile-head__text h1 {
+.profile-stage {
+  display: grid;
+  grid-template-columns: minmax(11.5rem, 0.92fr) minmax(15rem, 1.2fr);
+  gap: 1.35rem 1.85rem;
+  align-items: center;
+  margin: 0 0 0.35rem;
+}
+
+.profile-stage__copy {
+  min-width: 0;
+  animation: stage-in 0.65s ease both;
+  animation-delay: 0.08s;
+}
+
+.profile-stage__copy h1 {
   margin-top: 0;
 }
 
-.about-block {
-  overflow: auto;
+.profile-stage__copy .meta {
+  margin-bottom: 0;
 }
 
-/* Chalkboard / site visual — not a face-portrait crop */
+/* Chalkboard frame matched to the photo */
 .profile-visual {
-  float: right;
-  margin: 0.15rem 0 1rem 1.35rem;
-  max-width: min(42%, 15.5rem);
-  padding: 0;
+  margin: 0;
+  padding: 0.5rem;
+  max-width: none;
+  background: linear-gradient(
+    160deg,
+    var(--board-mid),
+    var(--board) 55%,
+    #15261c
+  );
+  outline: 1px solid color-mix(in srgb, var(--chalk-yellow) 55%, transparent);
+  outline-offset: 3px;
+  animation: stage-in 0.7s ease both;
 }
 
 .profile-visual img {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--line);
-  background: #2a4636;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--board);
 }
 
 .profile-visual--empty {
@@ -123,10 +170,9 @@ a:focus-visible {
   align-items: center;
   justify-content: center;
   aspect-ratio: 3 / 4;
-  border: 1px dashed #ccc;
-  background: #fafafa;
-  color: #bbb;
+  color: rgba(245, 245, 240, 0.55);
   font-size: 0.85rem;
+  outline: 1px dashed color-mix(in srgb, var(--chalk-yellow) 40%, transparent);
 }
 
 .site-note {
@@ -147,6 +193,7 @@ h2 {
   margin: 2rem 0 0.75rem;
   padding-bottom: 0.35rem;
   border-bottom: 2px solid var(--red);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--chalk-yellow) 35%, transparent);
   font-size: 1.25rem;
   font-weight: 700;
 }
@@ -323,16 +370,31 @@ a.pub-venue {
   border-top: 1px solid var(--line);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .profile-visual,
+  .profile-stage__copy {
+    animation: none;
+  }
+}
+
 @media (max-width: 700px) {
   .list li {
     grid-template-columns: 1fr;
   }
 
+  .profile-stage {
+    grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .profile-stage__copy {
+    order: -1;
+    animation-delay: 0s;
+  }
+
   .profile-visual {
-    float: none;
-    display: block;
-    margin: 0.75rem 0 1.25rem;
-    max-width: min(100%, 16rem);
+    max-width: min(100%, 19rem);
+    padding: 0.4rem;
   }
 
   .site-header__inner {
