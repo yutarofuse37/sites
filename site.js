@@ -340,7 +340,12 @@
   const root = document.getElementById("content");
   if (!page || !root) return;
 
-  root.innerHTML = `<p class="meta">${copy.loading}</p>`;
+  // Keep prerendered HTML for crawlers/users until fresh JSON arrives.
+  // Wiping to "Loading…" made Google temporarily see a thin page.
+  const hasPrerender = root.childElementCount > 0;
+  if (!hasPrerender) {
+    root.innerHTML = `<p class="meta" data-loading="1">${copy.loading}</p>`;
+  }
 
   const loadJson = (url) =>
     fetch(url, { cache: "no-cache" }).then((res) => {
@@ -348,19 +353,25 @@
       return res.json();
     });
 
+  const showLoadError = () => {
+    if (!hasPrerender) {
+      root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
+    }
+  };
+
   if (page === "papers") {
     loadJson(papersUrl)
       .then((data) => renderPapers(data, root))
       .catch((error) => {
         console.error(error);
-        root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
+        showLoadError();
       });
   } else if (page === "home") {
     loadJson(dataUrl)
       .then((data) => renderHome(data, root))
       .catch((error) => {
         console.error(error);
-        root.innerHTML = `<p class="meta">${copy.loadError}</p>`;
+        showLoadError();
       });
   }
 })();

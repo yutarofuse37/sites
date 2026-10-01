@@ -48,11 +48,21 @@ Papers/Talks は `data/papers.json` にまとめて登録します（1回の編�
    - `https://yutarofuse37.github.io/sites/papers.html`
 6. 反映まで数日〜数週間かかることがあります。`site:yutarofuse37.github.io/sites` で確認できます。
 
+### 「クロール済み - インデックス未登録」のとき
+
+これはブロックではなく、Google が一度読んだうえで「今は載せない」と判断した状態です。
+
+1. URL 検査 → **ライブテスト** → 「テスト済みのページを表示」で、本文（氏名・自己紹介・論文一覧）が見えるか確認
+2. 見えれば「インデックス登録をリクエスト」を再度実行
+3. researchmap / Google Scholar / ORCID など外部プロフィールから、このサイトへリンクがあると強い
+4. 数日待っても変わらなければ、もう一度ライブテストしてから再リクエスト
+
 ### サイト側で入れてある対策
 
-- `robots.txt` / `sitemap.xml`
-- canonical・hreflang・Person JSON-LD
-- **ビルド時プリレンダー**（HTML に本文を埋め込み。JS オフのクローラでも読める）
+- `robots.txt` / `sitemap.xml`（`lastmod` 付き）
+- canonical・hreflang・Person JSON-LD・og:image
+- **ビルド時プリレンダー**（HTML に本文を埋め込み）
+- **JS 起動時にプリレンダー本文を消さない**（「読み込み中…」で空にしない）
 
 補足: GitHub Pages のプロジェクトサイトでは、ホスト直下の `robots.txt`（`https://yutarofuse37.github.io/robots.txt`）が優先されます。未設置（404）ならデフォルトでクロール可です。
 
